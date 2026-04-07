@@ -5,7 +5,6 @@ description: >-
 type: Index
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 tags:
-  - API
   - Dropship
   - Marketplace
 url: >-
@@ -16,8 +15,7 @@ specificationVersion: '0.19'
 apis:
   - aid: rithum:dsco-platform-api
     name: Dsco Platform API
-    tags:
-      - API
+    tags: []
     humanURL: https://support.dsco.io/hc/en-us
     properties:
       - url: https://api.dsco.io/doc/v3/reference/
