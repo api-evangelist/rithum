@@ -1,0 +1,46 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://api-evangelist.github.io/rithum/json-schema/dsco-catalog-item-schema.json",
+  "title": "Dsco Catalog Item",
+  "description": "Schema for a product catalog item in the Rithum Dsco platform.",
+  "type": "object",
+  "required": ["sku"],
+  "properties": {
+    "sku": {
+      "type": "string",
+      "description": "Supplier stock keeping unit identifier"
+    },
+    "title": {
+      "type": "string",
+      "description": "Product title"
+    },
+    "description": {
+      "type": "string",
+      "description": "Product description"
+    },
+    "cost": {
+      "type": "number",
+      "format": "float",
+      "description": "Wholesale cost — required for dropship model"
+    },
+    "retailModelRules": {
+      "type": "object",
+      "description": "Rules governing which retail models this item supports",
+      "properties": {
+        "allowedModels": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": ["dropship", "marketplace"]
+          },
+          "description": "Must include 'dropship' to enable dropship usage"
+        }
+      }
+    },
+    "attributes": {
+      "type": "object",
+      "description": "Arbitrary product attributes (color, size, weight, etc.)",
+      "additionalProperties": true
+    }
+  }
+}

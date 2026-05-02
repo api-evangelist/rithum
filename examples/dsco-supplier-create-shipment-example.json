@@ -1,0 +1,29 @@
+{
+  "request": {
+    "method": "POST",
+    "url": "https://api.dsco.io/api/v3/supplier/shipment-in",
+    "headers": {
+      "Authorization": "Bearer <access_token>",
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "shipments": [
+        {
+          "orderId": "ORD-2026-00145",
+          "lineItemId": "LI-001",
+          "trackingNumber": "1Z999AA10123456784",
+          "carrier": "UPS",
+          "shippedAt": "2026-05-02T09:15:00Z"
+        }
+      ]
+    }
+  },
+  "response": {
+    "status": 200,
+    "body": {
+      "batchId": "BATCH-SHIP-20260502-001",
+      "status": "accepted",
+      "errors": []
+    }
+  }
+}

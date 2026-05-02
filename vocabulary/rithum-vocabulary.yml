@@ -1,0 +1,161 @@
+vocabulary:
+  name: Rithum / Dsco Commerce Vocabulary
+  description: >-
+    Domain vocabulary for the Rithum (formerly CommerceHub/ChannelAdvisor)
+    and Dsco platform, covering dropship, marketplace, and commerce operations
+    terminology.
+  version: "1.0.0"
+  created: "2026-05-02"
+
+terms:
+  - term: Dropship
+    definition: >-
+      A fulfillment model where a retailer sells products they do not stock;
+      the supplier ships directly to the consumer on behalf of the retailer.
+    category: Fulfillment Model
+    relatedTerms:
+      - Supplier
+      - Retailer
+      - Shipment
+
+  - term: Marketplace
+    definition: >-
+      A commerce model where multiple suppliers sell products through a single
+      retailer's storefront, enabling private or curated marketplaces.
+    category: Fulfillment Model
+    relatedTerms:
+      - Dropship
+      - Supplier
+      - Retailer
+
+  - term: Retailer
+    definition: >-
+      A business that sells products to consumers and creates orders for
+      supplier fulfillment through the Dsco platform.
+    category: Commerce Actor
+    relatedTerms:
+      - Supplier
+      - Order
+      - Channel
+
+  - term: Supplier
+    definition: >-
+      A business that provides products and fulfills orders on behalf of
+      retailers through the Dsco platform.
+    category: Commerce Actor
+    relatedTerms:
+      - Retailer
+      - Catalog
+      - Inventory
+      - Shipment
+
+  - term: Order
+    definition: >-
+      A request from a retailer to a supplier to fulfill one or more items for
+      a consumer. Contains line items, shipping address, and fulfillment model.
+    category: Commerce Object
+    relatedTerms:
+      - Retailer
+      - Supplier
+      - Shipment
+      - Invoice
+
+  - term: Catalog
+    definition: >-
+      The collection of product listings from a supplier, including SKUs,
+      descriptions, costs, and retail model rules.
+    category: Commerce Object
+    relatedTerms:
+      - Supplier
+      - SKU
+      - Inventory
+
+  - term: Inventory
+    definition: >-
+      Quantity on hand for a supplier's catalog items at specific warehouse
+      locations.
+    category: Commerce Object
+    relatedTerms:
+      - Catalog
+      - Supplier
+
+  - term: Shipment
+    definition: >-
+      A shipment record confirming physical dispatch of ordered items, including
+      tracking number and carrier information.
+    category: Commerce Object
+    relatedTerms:
+      - Order
+      - Carrier
+      - TrackingNumber
+
+  - term: Invoice
+    definition: >-
+      A billing document from a supplier to a retailer for fulfilled orders,
+      specifying amounts charged.
+    category: Commerce Object
+    relatedTerms:
+      - Order
+      - Supplier
+
+  - term: Return
+    definition: >-
+      A reversal of a fulfilled order where items are sent back from the
+      consumer or retailer to the supplier.
+    category: Commerce Object
+    relatedTerms:
+      - Order
+      - Supplier
+      - Retailer
+
+  - term: Stream
+    definition: >-
+      An event-driven data channel that delivers near-real-time notifications
+      about order, inventory, catalog, and invoice changes via micro-polling.
+    category: Platform Concept
+    relatedTerms:
+      - StreamEvent
+      - Partition
+      - Checkpoint
+
+  - term: Partition
+    definition: >-
+      A subdivision of a stream for distributing read load across multiple
+      independent consumers. Events persist 90 days per partition.
+    category: Platform Concept
+    relatedTerms:
+      - Stream
+
+  - term: SKU
+    definition: >-
+      Stock Keeping Unit — a supplier-defined unique identifier for a product
+      variant.
+    category: Product Concept
+    relatedTerms:
+      - Catalog
+      - Inventory
+
+  - term: BatchRequest
+    definition: >-
+      A collection of objects submitted together in a single API call.
+      Small batch supports hundreds of objects synchronously; large batch
+      supports thousands asynchronously.
+    category: API Concept
+    relatedTerms:
+      - BatchId
+
+  - term: RithumIQ
+    definition: >-
+      An AI engine embedded in the Rithum platform providing automated
+      recommendations and operational insights across commerce workflows.
+    category: Platform Feature
+
+  - term: Assortment
+    definition: >-
+      A curated collection of supplier items made available to a specific
+      retailer channel.
+    category: Commerce Concept
+    relatedTerms:
+      - Catalog
+      - Retailer
+      - Supplier

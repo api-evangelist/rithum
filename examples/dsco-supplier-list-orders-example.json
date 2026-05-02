@@ -1,0 +1,48 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "https://api.dsco.io/api/v3/supplier/order-out",
+    "headers": {
+      "Authorization": "Bearer <access_token>"
+    },
+    "queryParameters": {
+      "status": "pending",
+      "limit": 10
+    }
+  },
+  "response": {
+    "status": 200,
+    "body": {
+      "orders": [
+        {
+          "orderId": "ORD-2026-00145",
+          "orderType": "Dropship",
+          "status": "pending",
+          "createdAt": "2026-05-01T14:23:11Z",
+          "updatedAt": "2026-05-01T14:23:11Z",
+          "retailerId": "RETAILER-001",
+          "supplierId": "SUPPLIER-042",
+          "items": [
+            {
+              "lineItemId": "LI-001",
+              "sku": "BLUE-SHIRT-LG",
+              "quantity": 2,
+              "cost": 15.99,
+              "price": 39.99
+            }
+          ],
+          "shippingAddress": {
+            "name": "Jane Smith",
+            "street1": "123 Main St",
+            "city": "Portland",
+            "state": "OR",
+            "postalCode": "97201",
+            "country": "US"
+          }
+        }
+      ],
+      "totalCount": 1,
+      "hasMore": false
+    }
+  }
+}

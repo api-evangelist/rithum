@@ -1,0 +1,115 @@
+extends: spectral:oas
+rules:
+  # Rithum / Dsco API Conventions
+
+  dsco-operation-has-tag:
+    description: All operations must have at least one tag
+    message: Operation {{path}} is missing a tag
+    severity: warn
+    given: "$.paths[*][get,post,put,patch,delete]"
+    then:
+      field: tags
+      function: truthy
+
+  dsco-operation-has-summary:
+    description: All operations must have a summary
+    message: Operation {{path}} is missing a summary
+    severity: error
+    given: "$.paths[*][get,post,put,patch,delete]"
+    then:
+      field: summary
+      function: truthy
+
+  dsco-operation-has-description:
+    description: All operations should have a description
+    message: Operation {{path}} is missing a description
+    severity: warn
+    given: "$.paths[*][get,post,put,patch,delete]"
+    then:
+      field: description
+      function: truthy
+
+  dsco-operation-has-operation-id:
+    description: All operations must have an operationId
+    message: Operation {{path}} is missing an operationId
+    severity: error
+    given: "$.paths[*][get,post,put,patch,delete]"
+    then:
+      field: operationId
+      function: truthy
+
+  dsco-operation-id-camel-case:
+    description: OperationIds should use camelCase
+    message: OperationId {{value}} should use camelCase
+    severity: warn
+    given: "$.paths[*][get,post,put,patch,delete].operationId"
+    then:
+      function: pattern
+      functionOptions:
+        match: "^[a-z][a-zA-Z0-9]+$"
+
+  dsco-responses-have-error-schema:
+    description: Error responses should reference a schema
+    message: Response {{path}} should define a schema
+    severity: warn
+    given: "$.paths[*][*].responses[4*,5*].content[*]"
+    then:
+      field: schema
+      function: truthy
+
+  dsco-post-has-request-body:
+    description: POST operations should have a requestBody
+    message: POST operation {{path}} is missing a requestBody
+    severity: warn
+    given: "$.paths[*].post"
+    then:
+      field: requestBody
+      function: truthy
+
+  dsco-bearer-auth-defined:
+    description: Security scheme should be BearerAuth
+    message: Security scheme {{path}} should use bearer authentication
+    severity: warn
+    given: "$.components.securitySchemes[*]"
+    then:
+      function: schema
+      functionOptions:
+        schema:
+          type: object
+          properties:
+            type:
+              type: string
+              enum:
+                - http
+          required:
+            - type
+
+  dsco-batch-request-has-array:
+    description: Batch request schemas should contain array properties
+    message: Batch request {{path}} should include array fields
+    severity: info
+    given: "$.components.schemas[*BatchRequest]"
+    then:
+      function: schema
+      functionOptions:
+        schema:
+          type: object
+
+  dsco-path-uses-kebab-case:
+    description: API paths should use kebab-case
+    message: Path {{path}} should use kebab-case segments
+    severity: warn
+    given: "$.paths[*]~"
+    then:
+      function: pattern
+      functionOptions:
+        match: "^(/[a-z0-9][a-z0-9-]*({[a-zA-Z]+})?)*$"
+
+  dsco-schema-has-description:
+    description: Schema properties should have descriptions
+    message: Schema {{path}} is missing a description
+    severity: info
+    given: "$.components.schemas[*].properties[*]"
+    then:
+      field: description
+      function: truthy

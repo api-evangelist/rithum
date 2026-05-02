@@ -1,0 +1,90 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://api-evangelist.github.io/rithum/json-schema/dsco-order-schema.json",
+  "title": "Dsco Order",
+  "description": "Schema for a Rithum Dsco platform order, used in dropship and marketplace commerce integrations.",
+  "type": "object",
+  "properties": {
+    "orderId": {
+      "type": "string",
+      "description": "Unique order identifier assigned by the Dsco platform"
+    },
+    "orderType": {
+      "type": "string",
+      "enum": ["Dropship", "Marketplace"],
+      "description": "Indicates whether this is a dropship or marketplace order"
+    },
+    "status": {
+      "type": "string",
+      "description": "Current status of the order",
+      "enum": ["pending", "acknowledged", "shipped", "cancelled", "returned", "invoiced"]
+    },
+    "createdAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp when the order was created"
+    },
+    "updatedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp when the order was last updated"
+    },
+    "retailerId": {
+      "type": "string",
+      "description": "Identifier of the retailer who placed the order"
+    },
+    "supplierId": {
+      "type": "string",
+      "description": "Identifier of the supplier fulfilling the order"
+    },
+    "items": {
+      "type": "array",
+      "description": "Line items included in the order",
+      "items": {
+        "type": "object",
+        "required": ["lineItemId", "sku", "quantity"],
+        "properties": {
+          "lineItemId": {
+            "type": "string",
+            "description": "Unique line item identifier"
+          },
+          "sku": {
+            "type": "string",
+            "description": "Supplier stock keeping unit"
+          },
+          "quantity": {
+            "type": "integer",
+            "minimum": 1,
+            "description": "Ordered quantity"
+          },
+          "cost": {
+            "type": "number",
+            "format": "float",
+            "description": "Wholesale cost charged by supplier to retailer"
+          },
+          "price": {
+            "type": "number",
+            "format": "float",
+            "description": "Retail price"
+          }
+        }
+      }
+    },
+    "shippingAddress": {
+      "type": "object",
+      "description": "Shipping destination address",
+      "properties": {
+        "name": { "type": "string" },
+        "street1": { "type": "string" },
+        "street2": { "type": "string" },
+        "city": { "type": "string" },
+        "state": { "type": "string" },
+        "postalCode": { "type": "string" },
+        "country": { "type": "string" },
+        "phone": { "type": "string" }
+      },
+      "required": ["name", "street1", "city", "state", "postalCode", "country"]
+    }
+  },
+  "required": ["orderId", "orderType", "status"]
+}
