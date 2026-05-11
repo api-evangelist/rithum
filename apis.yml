@@ -119,6 +119,13 @@ common:
     url: >-
       https://raw.githubusercontent.com/api-evangelist/rithum/refs/heads/main/vocabulary/rithum-vocabulary.yml
 
+  - type: Integrations
+    url: https://www.rithum.com/partners/
+integrations:
+  - name: Rithum
+  - name: LinkedIn
+  - name: YouTube
+  - name: Instagram
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
