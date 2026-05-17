@@ -108,7 +108,7 @@ common:
     url: https://www.rithum.com/privacy-policy/
   - type: TermsOfService
     url: https://www.rithum.com/terms-of-service/
-  - type: Status
+  - type: StatusPage
     url: https://status.rithum.com
   - type: GitHub
     url: https://github.com/rithum
