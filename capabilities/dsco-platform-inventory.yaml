@@ -1,0 +1,80 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Dsco Platform API — Inventory
+  description: 'Dsco Platform API — Inventory. 1 operations. Lead operation: Update Supplier Inventory. Self-contained Naftiko
+    capability covering one Rithum business surface.'
+  tags:
+  - Rithum
+  - Inventory
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    RITHUM_API_KEY: RITHUM_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: dsco-platform-inventory
+    baseUri: https://api.dsco.io/api/v3
+    description: Dsco Platform API — Inventory business capability. Self-contained, no shared references.
+    resources:
+    - name: supplier-inventory-in
+      path: /supplier/inventory-in
+      operations:
+      - name: supplierupdateinventory
+        method: POST
+        description: Update Supplier Inventory
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.RITHUM_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: dsco-platform-inventory-rest
+    port: 8080
+    description: REST adapter for Dsco Platform API — Inventory. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/supplier/inventory-in
+      name: supplier-inventory-in
+      description: REST surface for supplier-inventory-in.
+      operations:
+      - method: POST
+        name: supplierupdateinventory
+        description: Update Supplier Inventory
+        call: dsco-platform-inventory.supplierupdateinventory
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: dsco-platform-inventory-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Dsco Platform API — Inventory. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: update-supplier-inventory
+      description: Update Supplier Inventory
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: dsco-platform-inventory.supplierupdateinventory
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

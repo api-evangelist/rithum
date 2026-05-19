@@ -1,0 +1,208 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Dsco Platform API — Streams
+  description: 'Dsco Platform API — Streams. 4 operations. Lead operation: Create Stream. Self-contained Naftiko capability
+    covering one Rithum business surface.'
+  tags:
+  - Rithum
+  - Streams
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    RITHUM_API_KEY: RITHUM_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: dsco-platform-streams
+    baseUri: https://api.dsco.io/api/v3
+    description: Dsco Platform API — Streams business capability. Self-contained, no shared references.
+    resources:
+    - name: streams
+      path: /streams
+      operations:
+      - name: createstream
+        method: POST
+        description: Create Stream
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: liststreams
+        method: GET
+        description: List Streams
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: streams-streamId-events
+      path: /streams/{streamId}/events
+      operations:
+      - name: getstreamevents
+        method: GET
+        description: Get Stream Events
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: streamId
+          in: path
+          type: string
+          description: The stream identifier
+          required: true
+        - name: position
+          in: query
+          type: string
+          description: Checkpoint position to start reading from
+        - name: limit
+          in: query
+          type: integer
+          description: Maximum number of events to return
+    - name: streams-streamId-position
+      path: /streams/{streamId}/position
+      operations:
+      - name: updatestreamposition
+        method: POST
+        description: Update Stream Position
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: streamId
+          in: path
+          type: string
+          description: The stream identifier
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.RITHUM_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: dsco-platform-streams-rest
+    port: 8080
+    description: REST adapter for Dsco Platform API — Streams. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/streams
+      name: streams
+      description: REST surface for streams.
+      operations:
+      - method: POST
+        name: createstream
+        description: Create Stream
+        call: dsco-platform-streams.createstream
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: GET
+        name: liststreams
+        description: List Streams
+        call: dsco-platform-streams.liststreams
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/streams/{streamid}/events
+      name: streams-streamid-events
+      description: REST surface for streams-streamId-events.
+      operations:
+      - method: GET
+        name: getstreamevents
+        description: Get Stream Events
+        call: dsco-platform-streams.getstreamevents
+        with:
+          streamId: rest.streamId
+          position: rest.position
+          limit: rest.limit
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/streams/{streamid}/position
+      name: streams-streamid-position
+      description: REST surface for streams-streamId-position.
+      operations:
+      - method: POST
+        name: updatestreamposition
+        description: Update Stream Position
+        call: dsco-platform-streams.updatestreamposition
+        with:
+          streamId: rest.streamId
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: dsco-platform-streams-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Dsco Platform API — Streams. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: create-stream
+      description: Create Stream
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: dsco-platform-streams.createstream
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-streams
+      description: List Streams
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: dsco-platform-streams.liststreams
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-stream-events
+      description: Get Stream Events
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: dsco-platform-streams.getstreamevents
+      with:
+        streamId: tools.streamId
+        position: tools.position
+        limit: tools.limit
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-stream-position
+      description: Update Stream Position
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: dsco-platform-streams.updatestreamposition
+      with:
+        streamId: tools.streamId
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

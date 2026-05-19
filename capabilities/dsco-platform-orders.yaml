@@ -1,0 +1,295 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Dsco Platform API — Orders
+  description: 'Dsco Platform API — Orders. 6 operations. Lead operation: Request Order Cancel. Self-contained Naftiko capability
+    covering one Rithum business surface.'
+  tags:
+  - Rithum
+  - Orders
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    RITHUM_API_KEY: RITHUM_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: dsco-platform-orders
+    baseUri: https://api.dsco.io/api/v3
+    description: Dsco Platform API — Orders business capability. Self-contained, no shared references.
+    resources:
+    - name: retailer-cancel-in
+      path: /retailer/cancel-in
+      operations:
+      - name: retailerrequestcancel
+        method: POST
+        description: Request Order Cancel
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: retailer-order-in
+      path: /retailer/order-in
+      operations:
+      - name: retailercreateorder
+        method: POST
+        description: Create Retailer Order
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: supplier-acknowledge-order-in
+      path: /supplier/acknowledge-order-in
+      operations:
+      - name: supplieracknowledgeorder
+        method: POST
+        description: Acknowledge Orders
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: supplier-cancel-in
+      path: /supplier/cancel-in
+      operations:
+      - name: suppliercancelorderitem
+        method: POST
+        description: Cancel Order Item
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: supplier-order-out
+      path: /supplier/order-out
+      operations:
+      - name: supplierlistorders
+        method: GET
+        description: List Orders
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: status
+          in: query
+          type: string
+          description: Filter orders by status
+        - name: limit
+          in: query
+          type: integer
+          description: Maximum number of orders to return
+    - name: supplier-order-out-orderId
+      path: /supplier/order-out/{orderId}
+      operations:
+      - name: suppliergetorder
+        method: GET
+        description: Get Order by ID
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: orderId
+          in: path
+          type: string
+          description: The unique identifier of the order
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.RITHUM_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: dsco-platform-orders-rest
+    port: 8080
+    description: REST adapter for Dsco Platform API — Orders. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/retailer/cancel-in
+      name: retailer-cancel-in
+      description: REST surface for retailer-cancel-in.
+      operations:
+      - method: POST
+        name: retailerrequestcancel
+        description: Request Order Cancel
+        call: dsco-platform-orders.retailerrequestcancel
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/retailer/order-in
+      name: retailer-order-in
+      description: REST surface for retailer-order-in.
+      operations:
+      - method: POST
+        name: retailercreateorder
+        description: Create Retailer Order
+        call: dsco-platform-orders.retailercreateorder
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/supplier/acknowledge-order-in
+      name: supplier-acknowledge-order-in
+      description: REST surface for supplier-acknowledge-order-in.
+      operations:
+      - method: POST
+        name: supplieracknowledgeorder
+        description: Acknowledge Orders
+        call: dsco-platform-orders.supplieracknowledgeorder
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/supplier/cancel-in
+      name: supplier-cancel-in
+      description: REST surface for supplier-cancel-in.
+      operations:
+      - method: POST
+        name: suppliercancelorderitem
+        description: Cancel Order Item
+        call: dsco-platform-orders.suppliercancelorderitem
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/supplier/order-out
+      name: supplier-order-out
+      description: REST surface for supplier-order-out.
+      operations:
+      - method: GET
+        name: supplierlistorders
+        description: List Orders
+        call: dsco-platform-orders.supplierlistorders
+        with:
+          status: rest.status
+          limit: rest.limit
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/supplier/order-out/{orderid}
+      name: supplier-order-out-orderid
+      description: REST surface for supplier-order-out-orderId.
+      operations:
+      - method: GET
+        name: suppliergetorder
+        description: Get Order by ID
+        call: dsco-platform-orders.suppliergetorder
+        with:
+          orderId: rest.orderId
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: dsco-platform-orders-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Dsco Platform API — Orders. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: request-order-cancel
+      description: Request Order Cancel
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: dsco-platform-orders.retailerrequestcancel
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-retailer-order
+      description: Create Retailer Order
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: dsco-platform-orders.retailercreateorder
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: acknowledge-orders
+      description: Acknowledge Orders
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: dsco-platform-orders.supplieracknowledgeorder
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: cancel-order-item
+      description: Cancel Order Item
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: dsco-platform-orders.suppliercancelorderitem
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-orders
+      description: List Orders
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: dsco-platform-orders.supplierlistorders
+      with:
+        status: tools.status
+        limit: tools.limit
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-order-id
+      description: Get Order by ID
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: dsco-platform-orders.suppliergetorder
+      with:
+        orderId: tools.orderId
+      outputParameters:
+      - type: object
+        mapping: $.

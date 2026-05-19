@@ -1,0 +1,80 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Dsco Platform API — Shipments
+  description: 'Dsco Platform API — Shipments. 1 operations. Lead operation: Create Shipment. Self-contained Naftiko capability
+    covering one Rithum business surface.'
+  tags:
+  - Rithum
+  - Shipments
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    RITHUM_API_KEY: RITHUM_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: dsco-platform-shipments
+    baseUri: https://api.dsco.io/api/v3
+    description: Dsco Platform API — Shipments business capability. Self-contained, no shared references.
+    resources:
+    - name: supplier-shipment-in
+      path: /supplier/shipment-in
+      operations:
+      - name: suppliercreateshipment
+        method: POST
+        description: Create Shipment
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.RITHUM_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: dsco-platform-shipments-rest
+    port: 8080
+    description: REST adapter for Dsco Platform API — Shipments. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/supplier/shipment-in
+      name: supplier-shipment-in
+      description: REST surface for supplier-shipment-in.
+      operations:
+      - method: POST
+        name: suppliercreateshipment
+        description: Create Shipment
+        call: dsco-platform-shipments.suppliercreateshipment
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: dsco-platform-shipments-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Dsco Platform API — Shipments. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: create-shipment
+      description: Create Shipment
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: dsco-platform-shipments.suppliercreateshipment
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

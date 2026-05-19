@@ -1,0 +1,122 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Dsco Platform API — Catalog
+  description: 'Dsco Platform API — Catalog. 2 operations. Lead operation: Update Catalog Attribution. Self-contained Naftiko
+    capability covering one Rithum business surface.'
+  tags:
+  - Rithum
+  - Catalog
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    RITHUM_API_KEY: RITHUM_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: dsco-platform-catalog
+    baseUri: https://api.dsco.io/api/v3
+    description: Dsco Platform API — Catalog business capability. Self-contained, no shared references.
+    resources:
+    - name: retailer-catalog-in
+      path: /retailer/catalog-in
+      operations:
+      - name: retailerupdatecatalogattribution
+        method: POST
+        description: Update Catalog Attribution
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: supplier-catalog-in
+      path: /supplier/catalog-in
+      operations:
+      - name: supplierupdatecatalog
+        method: POST
+        description: Update Supplier Catalog
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.RITHUM_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: dsco-platform-catalog-rest
+    port: 8080
+    description: REST adapter for Dsco Platform API — Catalog. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/retailer/catalog-in
+      name: retailer-catalog-in
+      description: REST surface for retailer-catalog-in.
+      operations:
+      - method: POST
+        name: retailerupdatecatalogattribution
+        description: Update Catalog Attribution
+        call: dsco-platform-catalog.retailerupdatecatalogattribution
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/supplier/catalog-in
+      name: supplier-catalog-in
+      description: REST surface for supplier-catalog-in.
+      operations:
+      - method: POST
+        name: supplierupdatecatalog
+        description: Update Supplier Catalog
+        call: dsco-platform-catalog.supplierupdatecatalog
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: dsco-platform-catalog-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Dsco Platform API — Catalog. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: update-catalog-attribution
+      description: Update Catalog Attribution
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: dsco-platform-catalog.retailerupdatecatalogattribution
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-supplier-catalog
+      description: Update Supplier Catalog
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: dsco-platform-catalog.supplierupdatecatalog
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
