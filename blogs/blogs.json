@@ -2,12 +2,20 @@
   "repo": "rithum",
   "feeds": [
     {
-      "source": "https://www.rithum.com/blog/",
+      "source": "https://www.rithum.com/blog/feed/",
       "feed_url": "https://www.rithum.com/blog/feed/",
-      "title": "Comments on: Blog",
-      "saved": 0
+      "title": "",
+      "saved": 0,
+      "method": "feed"
+    },
+    {
+      "source": "https://knowledge.rithum.com",
+      "feed_url": "https://knowledge.rithum.com",
+      "title": "",
+      "saved": 0,
+      "method": "none"
     }
   ],
-  "fetched": "2026-05-17T20:20:35Z",
+  "fetched": "2026-06-01T23:35:02Z",
   "post_count": 0
 }
