@@ -1,0 +1,459 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Dsco Platform API",
+    "version": "v3"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Authentication",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Access Token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.dsco.io/api/v3/oauth2/token",
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "grant_type",
+                  "value": ""
+                },
+                {
+                  "name": "client_id",
+                  "value": ""
+                },
+                {
+                  "name": "client_secret",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Obtain an OAuth2 bearer token using client credentials grant. The returned token must be used as a Bearer token in the Authorization header for all subsequent API requests."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Catalog",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Update Supplier Catalog",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.dsco.io/api/v3/supplier/catalog-in",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Supplier operation to create or update product catalog items. Supports small batch (synchronous) and large batch (asynchronous) modes."
+        },
+        {
+          "info": {
+            "name": "Update Catalog Attribution",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.dsco.io/api/v3/retailer/catalog-in",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Retailer operation to update catalog attribution data. Large batch only."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Inventory",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Update Supplier Inventory",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.dsco.io/api/v3/supplier/inventory-in",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Supplier operation to update inventory quantities for catalog items. Supports small batch and large batch modes."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Shipments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create Shipment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.dsco.io/api/v3/supplier/shipment-in",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Supplier operation to create shipment records for fulfilled orders. Supports small batch mode only."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Orders",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Cancel Order Item",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.dsco.io/api/v3/supplier/cancel-in",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Supplier operation to cancel an order item. Supports small batch mode only."
+        },
+        {
+          "info": {
+            "name": "Acknowledge Orders",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.dsco.io/api/v3/supplier/acknowledge-order-in",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Supplier operation to acknowledge receipt of orders. Synchronous only."
+        },
+        {
+          "info": {
+            "name": "Get Order by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.dsco.io/api/v3/supplier/order-out/:orderId",
+            "params": [
+              {
+                "name": "orderId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the order"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Supplier operation to retrieve a specific order by its identifier."
+        },
+        {
+          "info": {
+            "name": "List Orders",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.dsco.io/api/v3/supplier/order-out",
+            "params": [
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filter orders by status"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of orders to return"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Supplier operation to retrieve a collection of orders."
+        },
+        {
+          "info": {
+            "name": "Create Retailer Order",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.dsco.io/api/v3/retailer/order-in",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Retailer operation to submit consumer orders to the Dsco platform. The orderType must be set to Dropship for dropship orders. Supports small batch and large batch modes."
+        },
+        {
+          "info": {
+            "name": "Request Order Cancel",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.dsco.io/api/v3/retailer/cancel-in",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Retailer operation to request cancellation of an order item. Synchronous only."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Returns",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create Return",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.dsco.io/api/v3/supplier/return-in",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Supplier operation to create return records. Supports small batch and large batch modes."
+        },
+        {
+          "info": {
+            "name": "Create Retailer Return",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.dsco.io/api/v3/retailer/return-in",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Retailer operation to initiate a return. Supports small batch and large batch."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Invoices",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create Invoice",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.dsco.io/api/v3/supplier/invoice-in",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Supplier operation to submit invoices for fulfilled orders. Supports small batch mode only."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Streams",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Streams",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.dsco.io/api/v3/streams",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Retrieve stream definitions and partition positions."
+        },
+        {
+          "info": {
+            "name": "Create Stream",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.dsco.io/api/v3/streams",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create a new event stream with query parameters for filtering events. Streams enable near-real-time event delivery via micro-polling."
+        },
+        {
+          "info": {
+            "name": "Get Stream Events",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.dsco.io/api/v3/streams/:streamId/events",
+            "params": [
+              {
+                "name": "streamId",
+                "value": "",
+                "type": "path",
+                "description": "The stream identifier"
+              },
+              {
+                "name": "position",
+                "value": "",
+                "type": "query",
+                "description": "Checkpoint position to start reading from"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of events to return"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Retrieve events from a stream starting from a checkpoint position. Events persist for 90 days per partition."
+        },
+        {
+          "info": {
+            "name": "Update Stream Position",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.dsco.io/api/v3/streams/:streamId/position",
+            "params": [
+              {
+                "name": "streamId",
+                "value": "",
+                "type": "path",
+                "description": "The stream identifier"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Confirm successful processing of events by updating the stream position."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

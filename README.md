@@ -1,91 +1,75 @@
-# Rithum
+# Rithum (rithum)
 
 Rithum is a commerce operations platform providing dropship, marketplace, and supply chain integration solutions for retailers, brands, and suppliers. Formerly known as CommerceHub and ChannelAdvisor, Rithum connects brands and retailers to manage product listings, inventory, order workflows, and performance across ecommerce channels. The platform powers the Dsco API for dropship and marketplace integrations. In 2025, Rithum launched RithumIQ, an AI engine for automated commerce recommendations and operational insights.
 
-**Website:** [https://www.rithum.com](https://www.rithum.com)
+**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/rithum/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/rithum/refs/heads/main/apis.yml)
 
-**Documentation:** [https://api.dsco.io/doc/v3/reference/](https://api.dsco.io/doc/v3/reference/)
+## Scope
+
+- **Type:** Index
+
+## Tags
+
+- Commerce
+- Dropship
+- Marketplace
+- Ecommerce
+- Supply Chain
+- Retail
+
+## Timestamps
+
+- **Created:** 2025-02-12
+- **Modified:** 2026-05-19
 
 ## APIs
 
 ### Dsco Platform API
 
-The Dsco Platform API v3 provides dropship and marketplace commerce integration for retailers and suppliers. It supports order management, catalog synchronization, inventory updates, shipment tracking, returns processing, and invoice workflows via streaming and batch endpoints. Authentication uses OAuth2 bearer tokens.
+The Dsco Platform API v3 provides dropship and marketplace commerce integration for retailers and suppliers. It supports order management, catalog synchronization, inventory updates, shipment tracking, returns processing, and invoice workflows via streaming and batch endpoints. Authentication uses OAuth2 bearer tokens obtained from the token endpoint.
 
+- **Human URL:** [https://api.dsco.io/](https://api.dsco.io/)
 - **Base URL:** `https://api.dsco.io/api/v3`
-- **Authentication:** OAuth2 Bearer Token
-- **Documentation:** [https://api.dsco.io/doc/v3/reference/](https://api.dsco.io/doc/v3/reference/)
-- **Getting Started:** [https://knowledge.rithum.com/s/article/Getting-started-with-the-Rithum-V3-API](https://knowledge.rithum.com/s/article/Getting-started-with-the-Rithum-V3-API)
 
-#### Key Capabilities
+#### Tags
 
-- **Order Management** — Retailer order creation and supplier order retrieval
-- **Catalog Synchronization** — Supplier product catalog creation and updates
-- **Inventory Updates** — Real-time inventory quantity management
-- **Shipment Tracking** — Shipment record creation with tracking numbers
-- **Returns Processing** — Return creation and completion workflows
-- **Invoice Workflows** — Invoice submission for fulfilled orders
-- **Event Streaming** — Near-real-time event delivery via partitioned streams
+- Commerce
+- Dropship
+- Marketplace
+- Orders
+- Catalog
+- Inventory
 
-## Artifacts
+#### Properties
 
-### OpenAPI Specifications
+- [Documentation](https://api.dsco.io/doc/v3/reference/)
+- [Guide](https://api.dsco.io/doc/v3/guides/standard-api-guide.html)
+- [Guide](https://api.dsco.io/doc/v3/guides/dropship-api-guide.html)
+- [Guide](https://api.dsco.io/doc/v3/guides/marketplace-api-guide.html)
+- [Getting Started](https://knowledge.rithum.com/s/article/Getting-started-with-the-Rithum-V3-API)
+- [OpenAPI](https://raw.githubusercontent.com/api-evangelist/rithum/refs/heads/main/openapi/dsco-platform-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
+- [Spectral Rules](https://raw.githubusercontent.com/api-evangelist/rithum/refs/heads/main/rules/dsco-platform-rules.yml)
+- [JSON Schema](https://raw.githubusercontent.com/api-evangelist/rithum/refs/heads/main/json-schema/dsco-order-schema.json) — [JSON Schema](https://json-schema.org/specification)
+- [JSON Schema](https://raw.githubusercontent.com/api-evangelist/rithum/refs/heads/main/json-schema/dsco-catalog-item-schema.json) — [JSON Schema](https://json-schema.org/specification)
+- [Postman Collection](collections/dsco-platform.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/dsco-platform.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
 
-| Spec | Description |
-|------|-------------|
-| [openapi/dsco-platform-openapi.yml](openapi/dsco-platform-openapi.yml) | Dsco Platform API v3 — orders, catalog, inventory, shipments, returns, invoices, streams |
+## Common Properties
 
-### Spectral Rules
-
-| Ruleset | Description |
-|---------|-------------|
-| [rules/dsco-platform-rules.yml](rules/dsco-platform-rules.yml) | Dsco API linting rules enforcing camelCase operationIds, batch request patterns, and bearer auth |
-
-### Capabilities
-
-| Capability | Description |
-|------------|-------------|
-| [capabilities/commerce-operations.yaml](capabilities/commerce-operations.yaml) | Unified workflow for dropship/marketplace commerce operations |
-| [capabilities/shared/dsco-platform.yaml](capabilities/shared/dsco-platform.yaml) | Shared Dsco Platform API consumed definition |
-
-### JSON Schemas
-
-| Schema | Description |
-|--------|-------------|
-| [json-schema/dsco-order-schema.json](json-schema/dsco-order-schema.json) | Dsco platform order with line items and shipping address |
-| [json-schema/dsco-catalog-item-schema.json](json-schema/dsco-catalog-item-schema.json) | Dsco product catalog item with SKU, cost, and retail model rules |
-
-### JSON Structure
-
-| Structure | Description |
-|-----------|-------------|
-| [json-structure/dsco-order-structure.json](json-structure/dsco-order-structure.json) | Field-by-field documentation of the order object |
-
-### JSON-LD Context
-
-| Context | Description |
-|---------|-------------|
-| [json-ld/rithum-context.jsonld](json-ld/rithum-context.jsonld) | Linked data context mapping Rithum/Dsco terms to schema.org |
-
-### Examples
-
-| Example | Description |
-|---------|-------------|
-| [examples/dsco-supplier-list-orders-example.json](examples/dsco-supplier-list-orders-example.json) | List supplier orders with request/response |
-| [examples/dsco-supplier-create-shipment-example.json](examples/dsco-supplier-create-shipment-example.json) | Create a shipment record with tracking |
-
-### Vocabulary
-
-| Vocabulary | Description |
-|------------|-------------|
-| [vocabulary/rithum-vocabulary.yml](vocabulary/rithum-vocabulary.yml) | Commerce domain terms including Dropship, Marketplace, Order, Stream, SKU |
-
-## Tags
-
-Commerce, Dropship, Marketplace, Ecommerce, Supply Chain, Retail
+- [LinkedIn](https://www.linkedin.com/company/rithumcommerce)
+- [Website](https://www.rithum.com)
+- [Documentation](https://api.dsco.io/doc/v3/reference/)
+- [Support](https://knowledge.rithum.com)
+- [Blog](https://www.rithum.com/blog/)
+- [Privacy Policy](https://www.rithum.com/privacy-policy/)
+- [Terms of Service](https://www.rithum.com/terms-of-service/)
+- [Status Page](https://status.rithum.com)
+- [Git Hub](https://github.com/rithum)
+- [J S O N L D Context](https://raw.githubusercontent.com/api-evangelist/rithum/refs/heads/main/json-ld/rithum-context.jsonld)
+- [Vocabulary](https://raw.githubusercontent.com/api-evangelist/rithum/refs/heads/main/vocabulary/rithum-vocabulary.yml)
+- [Integrations](https://www.rithum.com/partners/)
 
 ## Maintainers
 
 **FN:** Kin Lane
-
 **Email:** kin@apievangelist.com
