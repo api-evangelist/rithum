@@ -2,11 +2,11 @@
   "repo": "rithum",
   "feeds": [
     {
-      "source": "https://www.rithum.com/blog/",
-      "feed_url": "https://www.rithum.com/blog/feed/",
+      "source": "https://www.rithum.com/feed/",
+      "feed_url": "https://www.rithum.com/feed/",
       "title": "",
       "saved": 0,
-      "method": "discovered"
+      "method": "feed"
     },
     {
       "source": "https://knowledge.rithum.com",
@@ -16,6 +16,6 @@
       "method": "none"
     }
   ],
-  "post_count": 1,
-  "fetched": "2026-06-14T20:42:17Z"
+  "post_count": 2,
+  "fetched": "2026-06-27T12:03:07Z"
 }
