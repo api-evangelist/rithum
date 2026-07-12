@@ -85,6 +85,10 @@ apis:
       - Shopify
       - Salesforce Commerce Cloud
 common:
+  - type: DomainSecurity
+    url: security/rithum-domain-security.yml
+  - type: Authentication
+    url: authentication/rithum-authentication.yml
   - type: LinkedIn
     url: https://www.linkedin.com/company/rithumcommerce
   - type: Website
