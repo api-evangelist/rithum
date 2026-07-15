@@ -85,6 +85,8 @@ apis:
       - Shopify
       - Salesforce Commerce Cloud
 common:
+  - type: AgenticAccess
+    url: agentic-access/rithum-agentic-access.yml
   - type: DomainSecurity
     url: security/rithum-domain-security.yml
   - type: Authentication
