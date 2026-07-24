@@ -1,0 +1,73 @@
+openapi: 3.0.3
+info:
+  title: Dsco Platform Authentication API
+  description: The Dsco Platform API v3 provides dropship and marketplace commerce integration for retailers and suppliers. It supports order management, catalog synchronization, inventory updates, shipment tracking, returns processing, and invoice workflows via streaming and batch endpoints. Authentication uses OAuth2 bearer tokens obtained from the token endpoint.
+  version: v3
+  contact:
+    name: Rithum Support
+    url: https://knowledge.rithum.com
+  termsOfService: https://www.rithum.com/terms-of-service/
+  license:
+    name: Proprietary
+servers:
+- url: https://api.dsco.io/api/v3
+  description: Dsco Platform API v3
+tags:
+- name: Authentication
+  description: OAuth2 token management
+paths:
+  /oauth2/token:
+    post:
+      operationId: getAccessToken
+      summary: Get Access Token
+      description: Obtain an OAuth2 bearer token using client credentials grant. The returned token must be used as a Bearer token in the Authorization header for all subsequent API requests.
+      tags:
+      - Authentication
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+              - grant_type
+              - client_id
+              - client_secret
+              properties:
+                grant_type:
+                  type: string
+                  enum:
+                  - client_credentials
+                client_id:
+                  type: string
+                  description: OAuth2 client ID
+                client_secret:
+                  type: string
+                  description: OAuth2 client secret
+      responses:
+        '200':
+          description: Access token response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessToken'
+        '401':
+          description: Unauthorized
+components:
+  schemas:
+    AccessToken:
+      type: object
+      properties:
+        access_token:
+          type: string
+          description: The OAuth2 bearer token
+        token_type:
+          type: string
+          example: bearer
+        expires_in:
+          type: integer
+          description: Token expiry in seconds
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer

@@ -1,0 +1,136 @@
+openapi: 3.0.3
+info:
+  title: Dsco Platform Authentication Catalog API
+  description: The Dsco Platform API v3 provides dropship and marketplace commerce integration for retailers and suppliers. It supports order management, catalog synchronization, inventory updates, shipment tracking, returns processing, and invoice workflows via streaming and batch endpoints. Authentication uses OAuth2 bearer tokens obtained from the token endpoint.
+  version: v3
+  contact:
+    name: Rithum Support
+    url: https://knowledge.rithum.com
+  termsOfService: https://www.rithum.com/terms-of-service/
+  license:
+    name: Proprietary
+servers:
+- url: https://api.dsco.io/api/v3
+  description: Dsco Platform API v3
+tags:
+- name: Catalog
+  description: Product catalog synchronization
+paths:
+  /supplier/catalog-in:
+    post:
+      operationId: supplierUpdateCatalog
+      summary: Update Supplier Catalog
+      description: Supplier operation to create or update product catalog items. Supports small batch (synchronous) and large batch (asynchronous) modes.
+      tags:
+      - Catalog
+      security:
+      - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CatalogBatchRequest'
+      responses:
+        '200':
+          description: Catalog update accepted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BatchResponse'
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+  /retailer/catalog-in:
+    post:
+      operationId: retailerUpdateCatalogAttribution
+      summary: Update Catalog Attribution
+      description: Retailer operation to update catalog attribution data. Large batch only.
+      tags:
+      - Catalog
+      security:
+      - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CatalogBatchRequest'
+      responses:
+        '200':
+          description: Attribution updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BatchResponse'
+        '401':
+          description: Unauthorized
+components:
+  schemas:
+    RetailModelRules:
+      type: object
+      properties:
+        allowedModels:
+          type: array
+          items:
+            type: string
+            enum:
+            - dropship
+            - marketplace
+    BatchError:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+        field:
+          type: string
+    BatchResponse:
+      type: object
+      properties:
+        batchId:
+          type: string
+          description: Unique identifier for the batch operation
+        status:
+          type: string
+          enum:
+          - accepted
+          - processing
+          - completed
+          - failed
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/BatchError'
+    CatalogItem:
+      type: object
+      properties:
+        sku:
+          type: string
+          description: Supplier stock keeping unit
+        title:
+          type: string
+        description:
+          type: string
+        cost:
+          type: number
+          format: float
+          description: Item cost (required for dropship model)
+        retailModelRules:
+          $ref: '#/components/schemas/RetailModelRules'
+        attributes:
+          type: object
+          additionalProperties: true
+    CatalogBatchRequest:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/CatalogItem'
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer

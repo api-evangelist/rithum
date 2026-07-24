@@ -1,0 +1,97 @@
+openapi: 3.0.3
+info:
+  title: Dsco Platform Authentication Shipments API
+  description: The Dsco Platform API v3 provides dropship and marketplace commerce integration for retailers and suppliers. It supports order management, catalog synchronization, inventory updates, shipment tracking, returns processing, and invoice workflows via streaming and batch endpoints. Authentication uses OAuth2 bearer tokens obtained from the token endpoint.
+  version: v3
+  contact:
+    name: Rithum Support
+    url: https://knowledge.rithum.com
+  termsOfService: https://www.rithum.com/terms-of-service/
+  license:
+    name: Proprietary
+servers:
+- url: https://api.dsco.io/api/v3
+  description: Dsco Platform API v3
+tags:
+- name: Shipments
+  description: Shipment creation and tracking
+paths:
+  /supplier/shipment-in:
+    post:
+      operationId: supplierCreateShipment
+      summary: Create Shipment
+      description: Supplier operation to create shipment records for fulfilled orders. Supports small batch mode only.
+      tags:
+      - Shipments
+      security:
+      - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ShipmentBatchRequest'
+      responses:
+        '200':
+          description: Shipment created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BatchResponse'
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+components:
+  schemas:
+    ShipmentBatchRequest:
+      type: object
+      properties:
+        shipments:
+          type: array
+          items:
+            $ref: '#/components/schemas/ShipmentItem'
+    ShipmentItem:
+      type: object
+      properties:
+        orderId:
+          type: string
+        lineItemId:
+          type: string
+        trackingNumber:
+          type: string
+        carrier:
+          type: string
+        shippedAt:
+          type: string
+          format: date-time
+    BatchError:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+        field:
+          type: string
+    BatchResponse:
+      type: object
+      properties:
+        batchId:
+          type: string
+          description: Unique identifier for the batch operation
+        status:
+          type: string
+          enum:
+          - accepted
+          - processing
+          - completed
+          - failed
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/BatchError'
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer

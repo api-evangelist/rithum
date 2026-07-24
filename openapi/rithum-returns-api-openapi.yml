@@ -1,0 +1,116 @@
+openapi: 3.0.3
+info:
+  title: Dsco Platform Authentication Returns API
+  description: The Dsco Platform API v3 provides dropship and marketplace commerce integration for retailers and suppliers. It supports order management, catalog synchronization, inventory updates, shipment tracking, returns processing, and invoice workflows via streaming and batch endpoints. Authentication uses OAuth2 bearer tokens obtained from the token endpoint.
+  version: v3
+  contact:
+    name: Rithum Support
+    url: https://knowledge.rithum.com
+  termsOfService: https://www.rithum.com/terms-of-service/
+  license:
+    name: Proprietary
+servers:
+- url: https://api.dsco.io/api/v3
+  description: Dsco Platform API v3
+tags:
+- name: Returns
+  description: Return and refund management
+paths:
+  /supplier/return-in:
+    post:
+      operationId: supplierCreateReturn
+      summary: Create Return
+      description: Supplier operation to create return records. Supports small batch and large batch modes.
+      tags:
+      - Returns
+      security:
+      - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReturnBatchRequest'
+      responses:
+        '200':
+          description: Return created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BatchResponse'
+        '401':
+          description: Unauthorized
+  /retailer/return-in:
+    post:
+      operationId: retailerCreateReturn
+      summary: Create Retailer Return
+      description: Retailer operation to initiate a return. Supports small batch and large batch.
+      tags:
+      - Returns
+      security:
+      - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReturnBatchRequest'
+      responses:
+        '200':
+          description: Return initiated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BatchResponse'
+        '401':
+          description: Unauthorized
+components:
+  schemas:
+    ReturnBatchRequest:
+      type: object
+      properties:
+        returns:
+          type: array
+          items:
+            $ref: '#/components/schemas/ReturnItem'
+    BatchError:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+        field:
+          type: string
+    BatchResponse:
+      type: object
+      properties:
+        batchId:
+          type: string
+          description: Unique identifier for the batch operation
+        status:
+          type: string
+          enum:
+          - accepted
+          - processing
+          - completed
+          - failed
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/BatchError'
+    ReturnItem:
+      type: object
+      properties:
+        orderId:
+          type: string
+        lineItemId:
+          type: string
+        returnReason:
+          type: string
+        quantity:
+          type: integer
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer

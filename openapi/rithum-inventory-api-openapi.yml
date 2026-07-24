@@ -1,0 +1,92 @@
+openapi: 3.0.3
+info:
+  title: Dsco Platform Authentication Inventory API
+  description: The Dsco Platform API v3 provides dropship and marketplace commerce integration for retailers and suppliers. It supports order management, catalog synchronization, inventory updates, shipment tracking, returns processing, and invoice workflows via streaming and batch endpoints. Authentication uses OAuth2 bearer tokens obtained from the token endpoint.
+  version: v3
+  contact:
+    name: Rithum Support
+    url: https://knowledge.rithum.com
+  termsOfService: https://www.rithum.com/terms-of-service/
+  license:
+    name: Proprietary
+servers:
+- url: https://api.dsco.io/api/v3
+  description: Dsco Platform API v3
+tags:
+- name: Inventory
+  description: Inventory level management
+paths:
+  /supplier/inventory-in:
+    post:
+      operationId: supplierUpdateInventory
+      summary: Update Supplier Inventory
+      description: Supplier operation to update inventory quantities for catalog items. Supports small batch and large batch modes.
+      tags:
+      - Inventory
+      security:
+      - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InventoryBatchRequest'
+      responses:
+        '200':
+          description: Inventory update accepted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BatchResponse'
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+components:
+  schemas:
+    InventoryBatchRequest:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/InventoryItem'
+    BatchError:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+        field:
+          type: string
+    BatchResponse:
+      type: object
+      properties:
+        batchId:
+          type: string
+          description: Unique identifier for the batch operation
+        status:
+          type: string
+          enum:
+          - accepted
+          - processing
+          - completed
+          - failed
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/BatchError'
+    InventoryItem:
+      type: object
+      properties:
+        sku:
+          type: string
+        quantity:
+          type: integer
+        warehouseId:
+          type: string
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer

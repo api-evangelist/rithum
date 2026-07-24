@@ -1,0 +1,196 @@
+openapi: 3.0.3
+info:
+  title: Dsco Platform Authentication Streams API
+  description: The Dsco Platform API v3 provides dropship and marketplace commerce integration for retailers and suppliers. It supports order management, catalog synchronization, inventory updates, shipment tracking, returns processing, and invoice workflows via streaming and batch endpoints. Authentication uses OAuth2 bearer tokens obtained from the token endpoint.
+  version: v3
+  contact:
+    name: Rithum Support
+    url: https://knowledge.rithum.com
+  termsOfService: https://www.rithum.com/terms-of-service/
+  license:
+    name: Proprietary
+servers:
+- url: https://api.dsco.io/api/v3
+  description: Dsco Platform API v3
+tags:
+- name: Streams
+  description: Event stream management for real-time data
+paths:
+  /streams:
+    post:
+      operationId: createStream
+      summary: Create Stream
+      description: Create a new event stream with query parameters for filtering events. Streams enable near-real-time event delivery via micro-polling.
+      tags:
+      - Streams
+      security:
+      - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StreamDefinition'
+      responses:
+        '200':
+          description: Stream created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Stream'
+        '401':
+          description: Unauthorized
+    get:
+      operationId: listStreams
+      summary: List Streams
+      description: Retrieve stream definitions and partition positions.
+      tags:
+      - Streams
+      security:
+      - BearerAuth: []
+      responses:
+        '200':
+          description: List of streams
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StreamList'
+        '401':
+          description: Unauthorized
+  /streams/{streamId}/events:
+    get:
+      operationId: getStreamEvents
+      summary: Get Stream Events
+      description: Retrieve events from a stream starting from a checkpoint position. Events persist for 90 days per partition.
+      tags:
+      - Streams
+      security:
+      - BearerAuth: []
+      parameters:
+      - name: streamId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The stream identifier
+      - name: position
+        in: query
+        schema:
+          type: string
+        description: Checkpoint position to start reading from
+      - name: limit
+        in: query
+        schema:
+          type: integer
+        description: Maximum number of events to return
+      responses:
+        '200':
+          description: Stream events
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StreamEvents'
+        '401':
+          description: Unauthorized
+  /streams/{streamId}/position:
+    post:
+      operationId: updateStreamPosition
+      summary: Update Stream Position
+      description: Confirm successful processing of events by updating the stream position.
+      tags:
+      - Streams
+      security:
+      - BearerAuth: []
+      parameters:
+      - name: streamId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The stream identifier
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StreamPositionUpdate'
+      responses:
+        '200':
+          description: Position updated
+        '401':
+          description: Unauthorized
+components:
+  schemas:
+    Stream:
+      type: object
+      properties:
+        streamId:
+          type: string
+        objectType:
+          type: string
+        partitionCount:
+          type: integer
+        createdAt:
+          type: string
+          format: date-time
+    StreamDefinition:
+      type: object
+      properties:
+        objectType:
+          type: string
+          enum:
+          - order
+          - return
+          - inventory
+          - catalog
+          - invoice
+          - orderitemchange
+        queryParams:
+          type: object
+          additionalProperties: true
+        partitionCount:
+          type: integer
+          default: 1
+    StreamEvent:
+      type: object
+      properties:
+        eventId:
+          type: string
+        eventType:
+          type: string
+        objectType:
+          type: string
+        data:
+          type: object
+          additionalProperties: true
+        timestamp:
+          type: string
+          format: date-time
+    StreamPositionUpdate:
+      type: object
+      properties:
+        position:
+          type: string
+          description: The position to update to (confirming events processed)
+    StreamList:
+      type: object
+      properties:
+        streams:
+          type: array
+          items:
+            $ref: '#/components/schemas/Stream'
+    StreamEvents:
+      type: object
+      properties:
+        events:
+          type: array
+          items:
+            $ref: '#/components/schemas/StreamEvent'
+        position:
+          type: string
+        hasMore:
+          type: boolean
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
