@@ -7,7 +7,20 @@ description: >-
   platform powers the Dsco API for dropship and marketplace integrations. In 2025, Rithum launched RithumIQ, an AI
   engine for automated commerce recommendations and operational insights.
 type: Index
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: freemium
+  onboarding: self-serve
+  trial: false
+  try_now: true
+  public: false
+  label: Freemium · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/rithum.png
 tags:
   - Commerce
   - Dropship
@@ -20,71 +33,241 @@ created: '2025-02-12'
 modified: '2026-05-19'
 specificationVersion: '0.19'
 apis:
-  - aid: rithum:dsco-platform-api
-    name: Dsco Platform API
-    description: >-
-      The Dsco Platform API v3 provides dropship and marketplace commerce integration for retailers and suppliers. It
-      supports order management, catalog synchronization, inventory updates, shipment tracking, returns processing, and
-      invoice workflows via streaming and batch endpoints. Authentication uses OAuth2 bearer tokens obtained from the
-      token endpoint.
-    humanURL: https://api.dsco.io/
-    baseURL: https://api.dsco.io/api/v3
-    tags:
-      - Commerce
-      - Dropship
-      - Marketplace
-      - Orders
-      - Catalog
-      - Inventory
-    properties:
-      - url: https://api.dsco.io/doc/v3/reference/
-        type: Documentation
-      - url: https://api.dsco.io/doc/v3/guides/standard-api-guide.html
-        type: Guide
-      - url: https://api.dsco.io/doc/v3/guides/dropship-api-guide.html
-        type: Guide
-      - url: https://api.dsco.io/doc/v3/guides/marketplace-api-guide.html
-        type: Guide
-      - url: https://knowledge.rithum.com/s/article/Getting-started-with-the-Rithum-V3-API
-        type: GettingStarted
-      - url: https://raw.githubusercontent.com/api-evangelist/rithum/refs/heads/main/openapi/dsco-platform-openapi.yml
-        type: OpenAPI
-      - url: https://raw.githubusercontent.com/api-evangelist/rithum/refs/heads/main/rules/dsco-platform-rules.yml
-        type: SpectralRules
-      - url: https://raw.githubusercontent.com/api-evangelist/rithum/refs/heads/main/json-schema/dsco-order-schema.json
-        type: JSONSchema
-      - url: >-
-          https://raw.githubusercontent.com/api-evangelist/rithum/refs/heads/main/json-schema/dsco-catalog-item-schema.json
-        type: JSONSchema
-    contact:
-      - FN: Rithum Support
-        url: https://knowledge.rithum.com
-    features:
-      - Order Management
-      - Catalog Synchronization
-      - Inventory Updates
-      - Shipment Tracking
-      - Returns Processing
-      - Invoice Workflows
-      - Streaming Events
-      - Batch Operations
-      - Dropship Integration
-      - Marketplace Integration
-    useCases:
-      - Retailer dropship order processing
-      - Supplier catalog and inventory sync
-      - Private marketplace management
-      - Multi-channel commerce operations
-    solutions:
-      - Commerce Operations
-      - Supply Chain Integration
-      - Retail Dropship
-    integrations:
-      - ChannelAdvisor
-      - Mirakl
-      - Shopify
-      - Salesforce Commerce Cloud
+- aid: rithum:rithum-authentication-api
+  name: Rithum Authentication API
+  description: OAuth2 token management
+  humanURL: https://api.dsco.io/
+  baseURL: https://api.dsco.io/api/v3
+  tags:
+  - Authentication
+  properties:
+  - type: OpenAPI
+    url: openapi/rithum-authentication-api-openapi.yml
+  - type: Documentation
+    url: https://api.dsco.io/doc/v3/reference/
+  - type: Guide
+    url: https://api.dsco.io/doc/v3/guides/standard-api-guide.html
+  - type: Guide
+    url: https://api.dsco.io/doc/v3/guides/dropship-api-guide.html
+  - type: Guide
+    url: https://api.dsco.io/doc/v3/guides/marketplace-api-guide.html
+  - type: GettingStarted
+    url: https://knowledge.rithum.com/s/article/Getting-started-with-the-Rithum-V3-API
+  - type: SpectralRules
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/rithum/refs/heads/main/rules/dsco-platform-rules.yml
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/rithum/refs/heads/main/json-schema/dsco-order-schema.json
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/rithum/refs/heads/main/json-schema/dsco-catalog-item-schema.json
+- aid: rithum:rithum-catalog-api
+  name: Rithum Catalog API
+  description: Product catalog synchronization
+  humanURL: https://api.dsco.io/
+  baseURL: https://api.dsco.io/api/v3
+  tags:
+  - Catalog
+  properties:
+  - type: OpenAPI
+    url: openapi/rithum-catalog-api-openapi.yml
+  - type: Documentation
+    url: https://api.dsco.io/doc/v3/reference/
+  - type: Guide
+    url: https://api.dsco.io/doc/v3/guides/standard-api-guide.html
+  - type: Guide
+    url: https://api.dsco.io/doc/v3/guides/dropship-api-guide.html
+  - type: Guide
+    url: https://api.dsco.io/doc/v3/guides/marketplace-api-guide.html
+  - type: GettingStarted
+    url: https://knowledge.rithum.com/s/article/Getting-started-with-the-Rithum-V3-API
+  - type: SpectralRules
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/rithum/refs/heads/main/rules/dsco-platform-rules.yml
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/rithum/refs/heads/main/json-schema/dsco-order-schema.json
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/rithum/refs/heads/main/json-schema/dsco-catalog-item-schema.json
+- aid: rithum:rithum-inventory-api
+  name: Rithum Inventory API
+  description: Inventory level management
+  humanURL: https://api.dsco.io/
+  baseURL: https://api.dsco.io/api/v3
+  tags:
+  - Inventory
+  properties:
+  - type: OpenAPI
+    url: openapi/rithum-inventory-api-openapi.yml
+  - type: Documentation
+    url: https://api.dsco.io/doc/v3/reference/
+  - type: Guide
+    url: https://api.dsco.io/doc/v3/guides/standard-api-guide.html
+  - type: Guide
+    url: https://api.dsco.io/doc/v3/guides/dropship-api-guide.html
+  - type: Guide
+    url: https://api.dsco.io/doc/v3/guides/marketplace-api-guide.html
+  - type: GettingStarted
+    url: https://knowledge.rithum.com/s/article/Getting-started-with-the-Rithum-V3-API
+  - type: SpectralRules
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/rithum/refs/heads/main/rules/dsco-platform-rules.yml
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/rithum/refs/heads/main/json-schema/dsco-order-schema.json
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/rithum/refs/heads/main/json-schema/dsco-catalog-item-schema.json
+- aid: rithum:rithum-invoices-api
+  name: Rithum Invoices API
+  description: Invoice processing
+  humanURL: https://api.dsco.io/
+  baseURL: https://api.dsco.io/api/v3
+  tags:
+  - Invoices
+  properties:
+  - type: OpenAPI
+    url: openapi/rithum-invoices-api-openapi.yml
+  - type: Documentation
+    url: https://api.dsco.io/doc/v3/reference/
+  - type: Guide
+    url: https://api.dsco.io/doc/v3/guides/standard-api-guide.html
+  - type: Guide
+    url: https://api.dsco.io/doc/v3/guides/dropship-api-guide.html
+  - type: Guide
+    url: https://api.dsco.io/doc/v3/guides/marketplace-api-guide.html
+  - type: GettingStarted
+    url: https://knowledge.rithum.com/s/article/Getting-started-with-the-Rithum-V3-API
+  - type: SpectralRules
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/rithum/refs/heads/main/rules/dsco-platform-rules.yml
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/rithum/refs/heads/main/json-schema/dsco-order-schema.json
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/rithum/refs/heads/main/json-schema/dsco-catalog-item-schema.json
+- aid: rithum:rithum-orders-api
+  name: Rithum Orders API
+  description: Retailer and supplier order operations
+  humanURL: https://api.dsco.io/
+  baseURL: https://api.dsco.io/api/v3
+  tags:
+  - Orders
+  properties:
+  - type: OpenAPI
+    url: openapi/rithum-orders-api-openapi.yml
+  - type: Documentation
+    url: https://api.dsco.io/doc/v3/reference/
+  - type: Guide
+    url: https://api.dsco.io/doc/v3/guides/standard-api-guide.html
+  - type: Guide
+    url: https://api.dsco.io/doc/v3/guides/dropship-api-guide.html
+  - type: Guide
+    url: https://api.dsco.io/doc/v3/guides/marketplace-api-guide.html
+  - type: GettingStarted
+    url: https://knowledge.rithum.com/s/article/Getting-started-with-the-Rithum-V3-API
+  - type: SpectralRules
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/rithum/refs/heads/main/rules/dsco-platform-rules.yml
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/rithum/refs/heads/main/json-schema/dsco-order-schema.json
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/rithum/refs/heads/main/json-schema/dsco-catalog-item-schema.json
+- aid: rithum:rithum-returns-api
+  name: Rithum Returns API
+  description: Return and refund management
+  humanURL: https://api.dsco.io/
+  baseURL: https://api.dsco.io/api/v3
+  tags:
+  - Returns
+  properties:
+  - type: OpenAPI
+    url: openapi/rithum-returns-api-openapi.yml
+  - type: Documentation
+    url: https://api.dsco.io/doc/v3/reference/
+  - type: Guide
+    url: https://api.dsco.io/doc/v3/guides/standard-api-guide.html
+  - type: Guide
+    url: https://api.dsco.io/doc/v3/guides/dropship-api-guide.html
+  - type: Guide
+    url: https://api.dsco.io/doc/v3/guides/marketplace-api-guide.html
+  - type: GettingStarted
+    url: https://knowledge.rithum.com/s/article/Getting-started-with-the-Rithum-V3-API
+  - type: SpectralRules
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/rithum/refs/heads/main/rules/dsco-platform-rules.yml
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/rithum/refs/heads/main/json-schema/dsco-order-schema.json
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/rithum/refs/heads/main/json-schema/dsco-catalog-item-schema.json
+- aid: rithum:rithum-shipments-api
+  name: Rithum Shipments API
+  description: Shipment creation and tracking
+  humanURL: https://api.dsco.io/
+  baseURL: https://api.dsco.io/api/v3
+  tags:
+  - Shipments
+  properties:
+  - type: OpenAPI
+    url: openapi/rithum-shipments-api-openapi.yml
+  - type: Documentation
+    url: https://api.dsco.io/doc/v3/reference/
+  - type: Guide
+    url: https://api.dsco.io/doc/v3/guides/standard-api-guide.html
+  - type: Guide
+    url: https://api.dsco.io/doc/v3/guides/dropship-api-guide.html
+  - type: Guide
+    url: https://api.dsco.io/doc/v3/guides/marketplace-api-guide.html
+  - type: GettingStarted
+    url: https://knowledge.rithum.com/s/article/Getting-started-with-the-Rithum-V3-API
+  - type: SpectralRules
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/rithum/refs/heads/main/rules/dsco-platform-rules.yml
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/rithum/refs/heads/main/json-schema/dsco-order-schema.json
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/rithum/refs/heads/main/json-schema/dsco-catalog-item-schema.json
+- aid: rithum:rithum-streams-api
+  name: Rithum Streams API
+  description: Event stream management for real-time data
+  humanURL: https://api.dsco.io/
+  baseURL: https://api.dsco.io/api/v3
+  tags:
+  - Streams
+  properties:
+  - type: OpenAPI
+    url: openapi/rithum-streams-api-openapi.yml
+  - type: Documentation
+    url: https://api.dsco.io/doc/v3/reference/
+  - type: Guide
+    url: https://api.dsco.io/doc/v3/guides/standard-api-guide.html
+  - type: Guide
+    url: https://api.dsco.io/doc/v3/guides/dropship-api-guide.html
+  - type: Guide
+    url: https://api.dsco.io/doc/v3/guides/marketplace-api-guide.html
+  - type: GettingStarted
+    url: https://knowledge.rithum.com/s/article/Getting-started-with-the-Rithum-V3-API
+  - type: SpectralRules
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/rithum/refs/heads/main/rules/dsco-platform-rules.yml
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/rithum/refs/heads/main/json-schema/dsco-order-schema.json
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/rithum/refs/heads/main/json-schema/dsco-catalog-item-schema.json
 common:
+  - type: PostmanWorkspace
+    url: https://www.postman.com/kinlaneapi/rithum/overview
   - type: AgenticAccess
     url: agentic-access/rithum-agentic-access.yml
   - type: DomainSecurity
