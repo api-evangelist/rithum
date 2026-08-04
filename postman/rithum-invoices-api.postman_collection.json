@@ -1,0 +1,199 @@
+{
+  "info": {
+    "_postman_id": "dc6ab99e-6f8a-4c70-a260-dc59c7bc3b8e",
+    "name": "Dsco Platform Authentication Invoices API",
+    "description": "The Dsco Platform API v3 provides dropship and marketplace commerce integration for retailers and suppliers. It supports order management, catalog synchronization, inventory updates, shipment tracking, returns processing, and invoice workflows via streaming and batch endpoints. Authentication uses OAuth2 bearer tokens obtained from the token endpoint.\n\nContact Support:\n Name: Rithum Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:48:10.000Z",
+    "updatedAt": "2026-07-28T02:48:11.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-dc6ab99e-6f8a-4c70-a260-dc59c7bc3b8e"
+  },
+  "item": [
+    {
+      "name": "supplier",
+      "item": [
+        {
+          "name": "invoice-in",
+          "item": [
+            {
+              "name": "Create Invoice",
+              "id": "9ea0c4e1-535c-4927-a8c6-4acf970cdc26",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{bearerToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"invoices\": [\n    {\n      \"orderId\": \"<string>\",\n      \"invoiceNumber\": \"<string>\",\n      \"amount\": \"<float>\",\n      \"invoiceDate\": \"<date>\"\n    },\n    {\n      \"orderId\": \"<string>\",\n      \"invoiceNumber\": \"<string>\",\n      \"amount\": \"<float>\",\n      \"invoiceDate\": \"<date>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/supplier/invoice-in",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "supplier",
+                    "invoice-in"
+                  ]
+                },
+                "description": "Supplier operation to submit invoices for fulfilled orders. Supports small batch mode only."
+              },
+              "response": [
+                {
+                  "id": "f1df2b79-8f8d-4f2f-8456-32b1ed376810",
+                  "name": "Invoice created",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"invoices\": [\n    {\n      \"orderId\": \"<string>\",\n      \"invoiceNumber\": \"<string>\",\n      \"amount\": \"<float>\",\n      \"invoiceDate\": \"<date>\"\n    },\n    {\n      \"orderId\": \"<string>\",\n      \"invoiceNumber\": \"<string>\",\n      \"amount\": \"<float>\",\n      \"invoiceDate\": \"<date>\"\n    }\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/supplier/invoice-in",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "supplier",
+                        "invoice-in"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"batchId\": \"<string>\",\n  \"status\": \"processing\",\n  \"errors\": [\n    {\n      \"code\": \"<string>\",\n      \"message\": \"<string>\",\n      \"field\": \"<string>\"\n    },\n    {\n      \"code\": \"<string>\",\n      \"message\": \"<string>\",\n      \"field\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T02:48:11.000Z",
+                  "updatedAt": "2026-07-28T02:48:11.000Z",
+                  "uid": "35240-f1df2b79-8f8d-4f2f-8456-32b1ed376810"
+                },
+                {
+                  "id": "c91c2845-8e1b-4299-8660-2147ee36051f",
+                  "name": "Unauthorized",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"invoices\": [\n    {\n      \"orderId\": \"<string>\",\n      \"invoiceNumber\": \"<string>\",\n      \"amount\": \"<float>\",\n      \"invoiceDate\": \"<date>\"\n    },\n    {\n      \"orderId\": \"<string>\",\n      \"invoiceNumber\": \"<string>\",\n      \"amount\": \"<float>\",\n      \"invoiceDate\": \"<date>\"\n    }\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/supplier/invoice-in",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "supplier",
+                        "invoice-in"
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T02:48:11.000Z",
+                  "updatedAt": "2026-07-28T02:48:11.000Z",
+                  "uid": "35240-c91c2845-8e1b-4299-8660-2147ee36051f"
+                }
+              ],
+              "createdAt": "2026-07-28T02:48:11.000Z",
+              "updatedAt": "2026-07-28T02:48:11.000Z",
+              "uid": "35240-9ea0c4e1-535c-4927-a8c6-4acf970cdc26"
+            }
+          ],
+          "id": "c8967a2c-e28d-4265-8eae-27f45360e131",
+          "createdAt": "2026-07-28T02:48:11.000Z",
+          "updatedAt": "2026-07-28T02:48:11.000Z",
+          "uid": "35240-c8967a2c-e28d-4265-8eae-27f45360e131"
+        }
+      ],
+      "id": "936187a9-3c01-4908-8430-bade2070e67c",
+      "createdAt": "2026-07-28T02:48:11.000Z",
+      "updatedAt": "2026-07-28T02:48:11.000Z",
+      "uid": "35240-936187a9-3c01-4908-8430-bade2070e67c"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.dsco.io/api/v3"
+    }
+  ]
+}

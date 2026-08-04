@@ -1,0 +1,378 @@
+{
+  "info": {
+    "_postman_id": "4a347f05-a2c2-4d13-979e-1cb3f2fb8b50",
+    "name": "Dsco Platform Authentication Returns API",
+    "description": "The Dsco Platform API v3 provides dropship and marketplace commerce integration for retailers and suppliers. It supports order management, catalog synchronization, inventory updates, shipment tracking, returns processing, and invoice workflows via streaming and batch endpoints. Authentication uses OAuth2 bearer tokens obtained from the token endpoint.\n\nContact Support:\n Name: Rithum Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:48:12.000Z",
+    "updatedAt": "2026-07-28T02:48:13.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-4a347f05-a2c2-4d13-979e-1cb3f2fb8b50"
+  },
+  "item": [
+    {
+      "name": "supplier",
+      "item": [
+        {
+          "name": "return-in",
+          "item": [
+            {
+              "name": "Create Return",
+              "id": "d9994697-25d6-4596-84c8-e75be0c94403",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{bearerToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"returns\": [\n    {\n      \"orderId\": \"<string>\",\n      \"lineItemId\": \"<string>\",\n      \"returnReason\": \"<string>\",\n      \"quantity\": \"<integer>\"\n    },\n    {\n      \"orderId\": \"<string>\",\n      \"lineItemId\": \"<string>\",\n      \"returnReason\": \"<string>\",\n      \"quantity\": \"<integer>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/supplier/return-in",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "supplier",
+                    "return-in"
+                  ]
+                },
+                "description": "Supplier operation to create return records. Supports small batch and large batch modes."
+              },
+              "response": [
+                {
+                  "id": "ace0c348-5d3f-4152-ab87-5e7dfefa1791",
+                  "name": "Return created",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"returns\": [\n    {\n      \"orderId\": \"<string>\",\n      \"lineItemId\": \"<string>\",\n      \"returnReason\": \"<string>\",\n      \"quantity\": \"<integer>\"\n    },\n    {\n      \"orderId\": \"<string>\",\n      \"lineItemId\": \"<string>\",\n      \"returnReason\": \"<string>\",\n      \"quantity\": \"<integer>\"\n    }\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/supplier/return-in",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "supplier",
+                        "return-in"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"batchId\": \"<string>\",\n  \"status\": \"completed\",\n  \"errors\": [\n    {\n      \"code\": \"<string>\",\n      \"message\": \"<string>\",\n      \"field\": \"<string>\"\n    },\n    {\n      \"code\": \"<string>\",\n      \"message\": \"<string>\",\n      \"field\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T02:48:13.000Z",
+                  "updatedAt": "2026-07-28T02:48:13.000Z",
+                  "uid": "35240-ace0c348-5d3f-4152-ab87-5e7dfefa1791"
+                },
+                {
+                  "id": "cda4d489-2477-4097-9f93-c44406598c2f",
+                  "name": "Unauthorized",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"returns\": [\n    {\n      \"orderId\": \"<string>\",\n      \"lineItemId\": \"<string>\",\n      \"returnReason\": \"<string>\",\n      \"quantity\": \"<integer>\"\n    },\n    {\n      \"orderId\": \"<string>\",\n      \"lineItemId\": \"<string>\",\n      \"returnReason\": \"<string>\",\n      \"quantity\": \"<integer>\"\n    }\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/supplier/return-in",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "supplier",
+                        "return-in"
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T02:48:13.000Z",
+                  "updatedAt": "2026-07-28T02:48:13.000Z",
+                  "uid": "35240-cda4d489-2477-4097-9f93-c44406598c2f"
+                }
+              ],
+              "createdAt": "2026-07-28T02:48:13.000Z",
+              "updatedAt": "2026-07-28T02:48:13.000Z",
+              "uid": "35240-d9994697-25d6-4596-84c8-e75be0c94403"
+            }
+          ],
+          "id": "9b315be0-0b80-4555-912d-8045dca9c32e",
+          "createdAt": "2026-07-28T02:48:13.000Z",
+          "updatedAt": "2026-07-28T02:48:13.000Z",
+          "uid": "35240-9b315be0-0b80-4555-912d-8045dca9c32e"
+        }
+      ],
+      "id": "281b7434-a482-4a28-8465-4e69b9426a1f",
+      "createdAt": "2026-07-28T02:48:13.000Z",
+      "updatedAt": "2026-07-28T02:48:13.000Z",
+      "uid": "35240-281b7434-a482-4a28-8465-4e69b9426a1f"
+    },
+    {
+      "name": "retailer",
+      "item": [
+        {
+          "name": "return-in",
+          "item": [
+            {
+              "name": "Create Retailer Return",
+              "id": "1fbe3558-b5fa-4f99-a75d-389853e3c4a8",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{bearerToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"returns\": [\n    {\n      \"orderId\": \"<string>\",\n      \"lineItemId\": \"<string>\",\n      \"returnReason\": \"<string>\",\n      \"quantity\": \"<integer>\"\n    },\n    {\n      \"orderId\": \"<string>\",\n      \"lineItemId\": \"<string>\",\n      \"returnReason\": \"<string>\",\n      \"quantity\": \"<integer>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/retailer/return-in",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "retailer",
+                    "return-in"
+                  ]
+                },
+                "description": "Retailer operation to initiate a return. Supports small batch and large batch."
+              },
+              "response": [
+                {
+                  "id": "a4f44e12-7b34-4f0e-984b-68e9141e348f",
+                  "name": "Return initiated",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"returns\": [\n    {\n      \"orderId\": \"<string>\",\n      \"lineItemId\": \"<string>\",\n      \"returnReason\": \"<string>\",\n      \"quantity\": \"<integer>\"\n    },\n    {\n      \"orderId\": \"<string>\",\n      \"lineItemId\": \"<string>\",\n      \"returnReason\": \"<string>\",\n      \"quantity\": \"<integer>\"\n    }\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/retailer/return-in",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "retailer",
+                        "return-in"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"batchId\": \"<string>\",\n  \"status\": \"completed\",\n  \"errors\": [\n    {\n      \"code\": \"<string>\",\n      \"message\": \"<string>\",\n      \"field\": \"<string>\"\n    },\n    {\n      \"code\": \"<string>\",\n      \"message\": \"<string>\",\n      \"field\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T02:48:13.000Z",
+                  "updatedAt": "2026-07-28T02:48:13.000Z",
+                  "uid": "35240-a4f44e12-7b34-4f0e-984b-68e9141e348f"
+                },
+                {
+                  "id": "b1775eb8-19d8-4654-9ee1-4ee9e54c9c55",
+                  "name": "Unauthorized",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"returns\": [\n    {\n      \"orderId\": \"<string>\",\n      \"lineItemId\": \"<string>\",\n      \"returnReason\": \"<string>\",\n      \"quantity\": \"<integer>\"\n    },\n    {\n      \"orderId\": \"<string>\",\n      \"lineItemId\": \"<string>\",\n      \"returnReason\": \"<string>\",\n      \"quantity\": \"<integer>\"\n    }\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/retailer/return-in",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "retailer",
+                        "return-in"
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T02:48:13.000Z",
+                  "updatedAt": "2026-07-28T02:48:13.000Z",
+                  "uid": "35240-b1775eb8-19d8-4654-9ee1-4ee9e54c9c55"
+                }
+              ],
+              "createdAt": "2026-07-28T02:48:13.000Z",
+              "updatedAt": "2026-07-28T02:48:13.000Z",
+              "uid": "35240-1fbe3558-b5fa-4f99-a75d-389853e3c4a8"
+            }
+          ],
+          "id": "4e21aaaf-14c0-4702-86ef-32f0c58fb9a9",
+          "createdAt": "2026-07-28T02:48:13.000Z",
+          "updatedAt": "2026-07-28T02:48:13.000Z",
+          "uid": "35240-4e21aaaf-14c0-4702-86ef-32f0c58fb9a9"
+        }
+      ],
+      "id": "bdd6157e-94b4-4f29-9664-491c9a7f3bf0",
+      "createdAt": "2026-07-28T02:48:13.000Z",
+      "updatedAt": "2026-07-28T02:48:13.000Z",
+      "uid": "35240-bdd6157e-94b4-4f29-9664-491c9a7f3bf0"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.dsco.io/api/v3"
+    }
+  ]
+}

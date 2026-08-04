@@ -1,0 +1,247 @@
+{
+  "info": {
+    "_postman_id": "fbc030cb-7f88-486b-b1fd-bd60f6cb9579",
+    "name": "Dsco Platform Authentication Shipments API",
+    "description": "The Dsco Platform API v3 provides dropship and marketplace commerce integration for retailers and suppliers. It supports order management, catalog synchronization, inventory updates, shipment tracking, returns processing, and invoice workflows via streaming and batch endpoints. Authentication uses OAuth2 bearer tokens obtained from the token endpoint.\n\nContact Support:\n Name: Rithum Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:48:13.000Z",
+    "updatedAt": "2026-07-28T02:48:14.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-fbc030cb-7f88-486b-b1fd-bd60f6cb9579"
+  },
+  "item": [
+    {
+      "name": "supplier",
+      "item": [
+        {
+          "name": "shipment-in",
+          "item": [
+            {
+              "name": "Create Shipment",
+              "id": "4a3643a0-e6c0-4c45-b7e0-d481269c4730",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{bearerToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"shipments\": [\n    {\n      \"orderId\": \"<string>\",\n      \"lineItemId\": \"<string>\",\n      \"trackingNumber\": \"<string>\",\n      \"carrier\": \"<string>\",\n      \"shippedAt\": \"<dateTime>\"\n    },\n    {\n      \"orderId\": \"<string>\",\n      \"lineItemId\": \"<string>\",\n      \"trackingNumber\": \"<string>\",\n      \"carrier\": \"<string>\",\n      \"shippedAt\": \"<dateTime>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/supplier/shipment-in",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "supplier",
+                    "shipment-in"
+                  ]
+                },
+                "description": "Supplier operation to create shipment records for fulfilled orders. Supports small batch mode only."
+              },
+              "response": [
+                {
+                  "id": "5b1fc00a-312e-4c3f-8ec6-ce630ea9d700",
+                  "name": "Shipment created",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"shipments\": [\n    {\n      \"orderId\": \"<string>\",\n      \"lineItemId\": \"<string>\",\n      \"trackingNumber\": \"<string>\",\n      \"carrier\": \"<string>\",\n      \"shippedAt\": \"<dateTime>\"\n    },\n    {\n      \"orderId\": \"<string>\",\n      \"lineItemId\": \"<string>\",\n      \"trackingNumber\": \"<string>\",\n      \"carrier\": \"<string>\",\n      \"shippedAt\": \"<dateTime>\"\n    }\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/supplier/shipment-in",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "supplier",
+                        "shipment-in"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"batchId\": \"<string>\",\n  \"status\": \"processing\",\n  \"errors\": [\n    {\n      \"code\": \"<string>\",\n      \"message\": \"<string>\",\n      \"field\": \"<string>\"\n    },\n    {\n      \"code\": \"<string>\",\n      \"message\": \"<string>\",\n      \"field\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T02:48:14.000Z",
+                  "updatedAt": "2026-07-28T02:48:14.000Z",
+                  "uid": "35240-5b1fc00a-312e-4c3f-8ec6-ce630ea9d700"
+                },
+                {
+                  "id": "33861a48-d69d-42b3-956a-1967f1e74e60",
+                  "name": "Bad request",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"shipments\": [\n    {\n      \"orderId\": \"<string>\",\n      \"lineItemId\": \"<string>\",\n      \"trackingNumber\": \"<string>\",\n      \"carrier\": \"<string>\",\n      \"shippedAt\": \"<dateTime>\"\n    },\n    {\n      \"orderId\": \"<string>\",\n      \"lineItemId\": \"<string>\",\n      \"trackingNumber\": \"<string>\",\n      \"carrier\": \"<string>\",\n      \"shippedAt\": \"<dateTime>\"\n    }\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/supplier/shipment-in",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "supplier",
+                        "shipment-in"
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T02:48:14.000Z",
+                  "updatedAt": "2026-07-28T02:48:14.000Z",
+                  "uid": "35240-33861a48-d69d-42b3-956a-1967f1e74e60"
+                },
+                {
+                  "id": "050a8e08-3713-4bbe-8fff-c8749fc48b7d",
+                  "name": "Unauthorized",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"shipments\": [\n    {\n      \"orderId\": \"<string>\",\n      \"lineItemId\": \"<string>\",\n      \"trackingNumber\": \"<string>\",\n      \"carrier\": \"<string>\",\n      \"shippedAt\": \"<dateTime>\"\n    },\n    {\n      \"orderId\": \"<string>\",\n      \"lineItemId\": \"<string>\",\n      \"trackingNumber\": \"<string>\",\n      \"carrier\": \"<string>\",\n      \"shippedAt\": \"<dateTime>\"\n    }\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/supplier/shipment-in",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "supplier",
+                        "shipment-in"
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T02:48:14.000Z",
+                  "updatedAt": "2026-07-28T02:48:14.000Z",
+                  "uid": "35240-050a8e08-3713-4bbe-8fff-c8749fc48b7d"
+                }
+              ],
+              "createdAt": "2026-07-28T02:48:14.000Z",
+              "updatedAt": "2026-07-28T02:48:14.000Z",
+              "uid": "35240-4a3643a0-e6c0-4c45-b7e0-d481269c4730"
+            }
+          ],
+          "id": "2fe90b3f-a7d0-4201-81ad-fc04d4d9e910",
+          "createdAt": "2026-07-28T02:48:14.000Z",
+          "updatedAt": "2026-07-28T02:48:14.000Z",
+          "uid": "35240-2fe90b3f-a7d0-4201-81ad-fc04d4d9e910"
+        }
+      ],
+      "id": "22d8b3d4-45ab-497e-9f09-e11ebe78b94b",
+      "createdAt": "2026-07-28T02:48:14.000Z",
+      "updatedAt": "2026-07-28T02:48:14.000Z",
+      "uid": "35240-22d8b3d4-45ab-497e-9f09-e11ebe78b94b"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.dsco.io/api/v3"
+    }
+  ]
+}

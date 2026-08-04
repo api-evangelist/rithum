@@ -1,0 +1,247 @@
+{
+  "info": {
+    "_postman_id": "7e9366ab-9c66-4d20-a958-cd4d3cb7435e",
+    "name": "Dsco Platform Authentication Inventory API",
+    "description": "The Dsco Platform API v3 provides dropship and marketplace commerce integration for retailers and suppliers. It supports order management, catalog synchronization, inventory updates, shipment tracking, returns processing, and invoice workflows via streaming and batch endpoints. Authentication uses OAuth2 bearer tokens obtained from the token endpoint.\n\nContact Support:\n Name: Rithum Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:48:04.000Z",
+    "updatedAt": "2026-07-28T02:48:04.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-7e9366ab-9c66-4d20-a958-cd4d3cb7435e"
+  },
+  "item": [
+    {
+      "name": "supplier",
+      "item": [
+        {
+          "name": "inventory-in",
+          "item": [
+            {
+              "name": "Update Supplier Inventory",
+              "id": "14c04688-1f85-4d54-b9c1-93d82464f6e1",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{bearerToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"items\": [\n    {\n      \"sku\": \"<string>\",\n      \"quantity\": \"<integer>\",\n      \"warehouseId\": \"<string>\"\n    },\n    {\n      \"sku\": \"<string>\",\n      \"quantity\": \"<integer>\",\n      \"warehouseId\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/supplier/inventory-in",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "supplier",
+                    "inventory-in"
+                  ]
+                },
+                "description": "Supplier operation to update inventory quantities for catalog items. Supports small batch and large batch modes."
+              },
+              "response": [
+                {
+                  "id": "61bb8831-a6d3-46c4-baf2-c8e46748df92",
+                  "name": "Inventory update accepted",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"items\": [\n    {\n      \"sku\": \"<string>\",\n      \"quantity\": \"<integer>\",\n      \"warehouseId\": \"<string>\"\n    },\n    {\n      \"sku\": \"<string>\",\n      \"quantity\": \"<integer>\",\n      \"warehouseId\": \"<string>\"\n    }\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/supplier/inventory-in",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "supplier",
+                        "inventory-in"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"batchId\": \"<string>\",\n  \"status\": \"failed\",\n  \"errors\": [\n    {\n      \"code\": \"<string>\",\n      \"message\": \"<string>\",\n      \"field\": \"<string>\"\n    },\n    {\n      \"code\": \"<string>\",\n      \"message\": \"<string>\",\n      \"field\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T02:48:04.000Z",
+                  "updatedAt": "2026-07-28T02:48:04.000Z",
+                  "uid": "35240-61bb8831-a6d3-46c4-baf2-c8e46748df92"
+                },
+                {
+                  "id": "820f6c60-7c1e-448e-8780-c2a3bd0d886c",
+                  "name": "Bad request",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"items\": [\n    {\n      \"sku\": \"<string>\",\n      \"quantity\": \"<integer>\",\n      \"warehouseId\": \"<string>\"\n    },\n    {\n      \"sku\": \"<string>\",\n      \"quantity\": \"<integer>\",\n      \"warehouseId\": \"<string>\"\n    }\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/supplier/inventory-in",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "supplier",
+                        "inventory-in"
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T02:48:04.000Z",
+                  "updatedAt": "2026-07-28T02:48:04.000Z",
+                  "uid": "35240-820f6c60-7c1e-448e-8780-c2a3bd0d886c"
+                },
+                {
+                  "id": "ec7d7a70-6af2-4d87-a2bb-6edf25fe516b",
+                  "name": "Unauthorized",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"items\": [\n    {\n      \"sku\": \"<string>\",\n      \"quantity\": \"<integer>\",\n      \"warehouseId\": \"<string>\"\n    },\n    {\n      \"sku\": \"<string>\",\n      \"quantity\": \"<integer>\",\n      \"warehouseId\": \"<string>\"\n    }\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/supplier/inventory-in",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "supplier",
+                        "inventory-in"
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T02:48:04.000Z",
+                  "updatedAt": "2026-07-28T02:48:04.000Z",
+                  "uid": "35240-ec7d7a70-6af2-4d87-a2bb-6edf25fe516b"
+                }
+              ],
+              "createdAt": "2026-07-28T02:48:04.000Z",
+              "updatedAt": "2026-07-28T02:48:04.000Z",
+              "uid": "35240-14c04688-1f85-4d54-b9c1-93d82464f6e1"
+            }
+          ],
+          "id": "a4eb3559-73c0-4991-b607-b472c324e925",
+          "createdAt": "2026-07-28T02:48:04.000Z",
+          "updatedAt": "2026-07-28T02:48:04.000Z",
+          "uid": "35240-a4eb3559-73c0-4991-b607-b472c324e925"
+        }
+      ],
+      "id": "7991e608-5f81-420f-93ff-98d154c6ad48",
+      "createdAt": "2026-07-28T02:48:04.000Z",
+      "updatedAt": "2026-07-28T02:48:04.000Z",
+      "uid": "35240-7991e608-5f81-420f-93ff-98d154c6ad48"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.dsco.io/api/v3"
+    }
+  ]
+}

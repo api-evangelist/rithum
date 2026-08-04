@@ -1,0 +1,1167 @@
+{
+  "info": {
+    "_postman_id": "9af5eb91-a3c2-4edc-8e80-d38ca0659631",
+    "name": "Dsco Platform Authentication Orders API",
+    "description": "The Dsco Platform API v3 provides dropship and marketplace commerce integration for retailers and suppliers. It supports order management, catalog synchronization, inventory updates, shipment tracking, returns processing, and invoice workflows via streaming and batch endpoints. Authentication uses OAuth2 bearer tokens obtained from the token endpoint.\n\nContact Support:\n Name: Rithum Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:48:11.000Z",
+    "updatedAt": "2026-07-28T02:48:12.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-9af5eb91-a3c2-4edc-8e80-d38ca0659631"
+  },
+  "item": [
+    {
+      "name": "supplier",
+      "item": [
+        {
+          "name": "cancel-in",
+          "item": [
+            {
+              "name": "Cancel Order Item",
+              "id": "5060440b-2576-4458-bf5f-81a6eaaf0e31",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{bearerToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"cancellations\": [\n    {\n      \"orderId\": \"<string>\",\n      \"lineItemId\": \"<string>\",\n      \"reason\": \"<string>\"\n    },\n    {\n      \"orderId\": \"<string>\",\n      \"lineItemId\": \"<string>\",\n      \"reason\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/supplier/cancel-in",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "supplier",
+                    "cancel-in"
+                  ]
+                },
+                "description": "Supplier operation to cancel an order item. Supports small batch mode only."
+              },
+              "response": [
+                {
+                  "id": "164171a0-b19f-4dc0-9f0b-964867ae931a",
+                  "name": "Cancellation accepted",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"cancellations\": [\n    {\n      \"orderId\": \"<string>\",\n      \"lineItemId\": \"<string>\",\n      \"reason\": \"<string>\"\n    },\n    {\n      \"orderId\": \"<string>\",\n      \"lineItemId\": \"<string>\",\n      \"reason\": \"<string>\"\n    }\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/supplier/cancel-in",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "supplier",
+                        "cancel-in"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"batchId\": \"<string>\",\n  \"status\": \"accepted\",\n  \"errors\": [\n    {\n      \"code\": \"<string>\",\n      \"message\": \"<string>\",\n      \"field\": \"<string>\"\n    },\n    {\n      \"code\": \"<string>\",\n      \"message\": \"<string>\",\n      \"field\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T02:48:12.000Z",
+                  "updatedAt": "2026-07-28T02:48:12.000Z",
+                  "uid": "35240-164171a0-b19f-4dc0-9f0b-964867ae931a"
+                },
+                {
+                  "id": "0cf83ec5-6b86-477e-90b5-cf0ba2de3cda",
+                  "name": "Bad request",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"cancellations\": [\n    {\n      \"orderId\": \"<string>\",\n      \"lineItemId\": \"<string>\",\n      \"reason\": \"<string>\"\n    },\n    {\n      \"orderId\": \"<string>\",\n      \"lineItemId\": \"<string>\",\n      \"reason\": \"<string>\"\n    }\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/supplier/cancel-in",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "supplier",
+                        "cancel-in"
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T02:48:12.000Z",
+                  "updatedAt": "2026-07-28T02:48:12.000Z",
+                  "uid": "35240-0cf83ec5-6b86-477e-90b5-cf0ba2de3cda"
+                },
+                {
+                  "id": "9837c730-340a-4694-97c2-7db276dd7202",
+                  "name": "Unauthorized",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"cancellations\": [\n    {\n      \"orderId\": \"<string>\",\n      \"lineItemId\": \"<string>\",\n      \"reason\": \"<string>\"\n    },\n    {\n      \"orderId\": \"<string>\",\n      \"lineItemId\": \"<string>\",\n      \"reason\": \"<string>\"\n    }\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/supplier/cancel-in",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "supplier",
+                        "cancel-in"
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T02:48:12.000Z",
+                  "updatedAt": "2026-07-28T02:48:12.000Z",
+                  "uid": "35240-9837c730-340a-4694-97c2-7db276dd7202"
+                }
+              ],
+              "createdAt": "2026-07-28T02:48:12.000Z",
+              "updatedAt": "2026-07-28T02:48:12.000Z",
+              "uid": "35240-5060440b-2576-4458-bf5f-81a6eaaf0e31"
+            }
+          ],
+          "id": "8672aa71-a8ce-4840-b3ff-0183c562767a",
+          "createdAt": "2026-07-28T02:48:12.000Z",
+          "updatedAt": "2026-07-28T02:48:12.000Z",
+          "uid": "35240-8672aa71-a8ce-4840-b3ff-0183c562767a"
+        },
+        {
+          "name": "acknowledge-order-in",
+          "item": [
+            {
+              "name": "Acknowledge Orders",
+              "id": "7e399159-145d-46e7-bf3e-381185e1dffe",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{bearerToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"orderIds\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/supplier/acknowledge-order-in",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "supplier",
+                    "acknowledge-order-in"
+                  ]
+                },
+                "description": "Supplier operation to acknowledge receipt of orders. Synchronous only."
+              },
+              "response": [
+                {
+                  "id": "a5e2acb1-3128-4c60-9603-77dd2bf9cff8",
+                  "name": "Order acknowledged",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"orderIds\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/supplier/acknowledge-order-in",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "supplier",
+                        "acknowledge-order-in"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"batchId\": \"<string>\",\n  \"status\": \"accepted\",\n  \"errors\": [\n    {\n      \"code\": \"<string>\",\n      \"message\": \"<string>\",\n      \"field\": \"<string>\"\n    },\n    {\n      \"code\": \"<string>\",\n      \"message\": \"<string>\",\n      \"field\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T02:48:12.000Z",
+                  "updatedAt": "2026-07-28T02:48:12.000Z",
+                  "uid": "35240-a5e2acb1-3128-4c60-9603-77dd2bf9cff8"
+                },
+                {
+                  "id": "44eff129-8fb4-40dc-bdfb-37d9250b35d3",
+                  "name": "Unauthorized",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"orderIds\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/supplier/acknowledge-order-in",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "supplier",
+                        "acknowledge-order-in"
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T02:48:12.000Z",
+                  "updatedAt": "2026-07-28T02:48:12.000Z",
+                  "uid": "35240-44eff129-8fb4-40dc-bdfb-37d9250b35d3"
+                }
+              ],
+              "createdAt": "2026-07-28T02:48:12.000Z",
+              "updatedAt": "2026-07-28T02:48:12.000Z",
+              "uid": "35240-7e399159-145d-46e7-bf3e-381185e1dffe"
+            }
+          ],
+          "id": "063d3faf-d6c1-4a29-bbdb-682f35211321",
+          "createdAt": "2026-07-28T02:48:12.000Z",
+          "updatedAt": "2026-07-28T02:48:12.000Z",
+          "uid": "35240-063d3faf-d6c1-4a29-bbdb-682f35211321"
+        },
+        {
+          "name": "order-out",
+          "item": [
+            {
+              "name": "{orderId}",
+              "item": [
+                {
+                  "name": "Get Order by ID",
+                  "id": "cddf8b0b-9567-4e0c-b638-581b73632ac7",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{bearerToken}}",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/supplier/order-out/:orderId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "supplier",
+                        "order-out",
+                        ":orderId"
+                      ],
+                      "variable": [
+                        {
+                          "id": "b275d114-c7a3-4e80-9675-8dd070270681",
+                          "key": "orderId",
+                          "value": "<string>",
+                          "description": "(Required) The unique identifier of the order"
+                        }
+                      ]
+                    },
+                    "description": "Supplier operation to retrieve a specific order by its identifier."
+                  },
+                  "response": [
+                    {
+                      "id": "7adb6e7d-f17b-4f7b-99e4-8c4a1e5b5422",
+                      "name": "Order details",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/supplier/order-out/:orderId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "supplier",
+                            "order-out",
+                            ":orderId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "orderId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"orderId\": \"<string>\",\n  \"orderType\": \"Marketplace\",\n  \"status\": \"<string>\",\n  \"createdAt\": \"<dateTime>\",\n  \"updatedAt\": \"<dateTime>\",\n  \"items\": [\n    {\n      \"lineItemId\": \"<string>\",\n      \"sku\": \"<string>\",\n      \"quantity\": \"<integer>\",\n      \"cost\": \"<float>\",\n      \"price\": \"<float>\"\n    },\n    {\n      \"lineItemId\": \"<string>\",\n      \"sku\": \"<string>\",\n      \"quantity\": \"<integer>\",\n      \"cost\": \"<float>\",\n      \"price\": \"<float>\"\n    }\n  ],\n  \"shippingAddress\": {\n    \"name\": \"<string>\",\n    \"street1\": \"<string>\",\n    \"street2\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"postalCode\": \"<string>\",\n    \"country\": \"<string>\",\n    \"phone\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-07-28T02:48:12.000Z",
+                      "updatedAt": "2026-07-28T02:48:12.000Z",
+                      "uid": "35240-7adb6e7d-f17b-4f7b-99e4-8c4a1e5b5422"
+                    },
+                    {
+                      "id": "887802d2-59aa-48d8-8885-394bb987fafa",
+                      "name": "Unauthorized",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/supplier/order-out/:orderId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "supplier",
+                            "order-out",
+                            ":orderId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "orderId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T02:48:12.000Z",
+                      "updatedAt": "2026-07-28T02:48:12.000Z",
+                      "uid": "35240-887802d2-59aa-48d8-8885-394bb987fafa"
+                    },
+                    {
+                      "id": "0411f3e4-bac2-405e-96cc-314518eea136",
+                      "name": "Order not found",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/supplier/order-out/:orderId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "supplier",
+                            "order-out",
+                            ":orderId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "orderId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T02:48:12.000Z",
+                      "updatedAt": "2026-07-28T02:48:12.000Z",
+                      "uid": "35240-0411f3e4-bac2-405e-96cc-314518eea136"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:48:12.000Z",
+                  "updatedAt": "2026-07-28T02:48:12.000Z",
+                  "uid": "35240-cddf8b0b-9567-4e0c-b638-581b73632ac7"
+                }
+              ],
+              "id": "3b2ad6d0-2abe-49bb-a209-b86ada70f312",
+              "createdAt": "2026-07-28T02:48:12.000Z",
+              "updatedAt": "2026-07-28T02:48:12.000Z",
+              "uid": "35240-3b2ad6d0-2abe-49bb-a209-b86ada70f312"
+            },
+            {
+              "name": "List Orders",
+              "id": "c91637b0-cab3-436a-8137-5ca5ff578919",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{bearerToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/supplier/order-out?status=<string>&limit=<integer>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "supplier",
+                    "order-out"
+                  ],
+                  "query": [
+                    {
+                      "description": "Filter orders by status",
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Maximum number of orders to return",
+                      "key": "limit",
+                      "value": "<integer>"
+                    }
+                  ]
+                },
+                "description": "Supplier operation to retrieve a collection of orders."
+              },
+              "response": [
+                {
+                  "id": "88cd82c2-a0ac-419a-a7a4-812a29915916",
+                  "name": "List of orders",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/supplier/order-out?status=<string>&limit=<integer>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "supplier",
+                        "order-out"
+                      ],
+                      "query": [
+                        {
+                          "description": "Filter orders by status",
+                          "key": "status",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Maximum number of orders to return",
+                          "key": "limit",
+                          "value": "<integer>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"orders\": [\n    {\n      \"orderId\": \"<string>\",\n      \"orderType\": \"Marketplace\",\n      \"status\": \"<string>\",\n      \"createdAt\": \"<dateTime>\",\n      \"updatedAt\": \"<dateTime>\",\n      \"items\": [\n        {\n          \"lineItemId\": \"<string>\",\n          \"sku\": \"<string>\",\n          \"quantity\": \"<integer>\",\n          \"cost\": \"<float>\",\n          \"price\": \"<float>\"\n        },\n        {\n          \"lineItemId\": \"<string>\",\n          \"sku\": \"<string>\",\n          \"quantity\": \"<integer>\",\n          \"cost\": \"<float>\",\n          \"price\": \"<float>\"\n        }\n      ],\n      \"shippingAddress\": {\n        \"name\": \"<string>\",\n        \"street1\": \"<string>\",\n        \"street2\": \"<string>\",\n        \"city\": \"<string>\",\n        \"state\": \"<string>\",\n        \"postalCode\": \"<string>\",\n        \"country\": \"<string>\",\n        \"phone\": \"<string>\"\n      }\n    },\n    {\n      \"orderId\": \"<string>\",\n      \"orderType\": \"Dropship\",\n      \"status\": \"<string>\",\n      \"createdAt\": \"<dateTime>\",\n      \"updatedAt\": \"<dateTime>\",\n      \"items\": [\n        {\n          \"lineItemId\": \"<string>\",\n          \"sku\": \"<string>\",\n          \"quantity\": \"<integer>\",\n          \"cost\": \"<float>\",\n          \"price\": \"<float>\"\n        },\n        {\n          \"lineItemId\": \"<string>\",\n          \"sku\": \"<string>\",\n          \"quantity\": \"<integer>\",\n          \"cost\": \"<float>\",\n          \"price\": \"<float>\"\n        }\n      ],\n      \"shippingAddress\": {\n        \"name\": \"<string>\",\n        \"street1\": \"<string>\",\n        \"street2\": \"<string>\",\n        \"city\": \"<string>\",\n        \"state\": \"<string>\",\n        \"postalCode\": \"<string>\",\n        \"country\": \"<string>\",\n        \"phone\": \"<string>\"\n      }\n    }\n  ],\n  \"totalCount\": \"<integer>\",\n  \"hasMore\": \"<boolean>\"\n}",
+                  "createdAt": "2026-07-28T02:48:12.000Z",
+                  "updatedAt": "2026-07-28T02:48:12.000Z",
+                  "uid": "35240-88cd82c2-a0ac-419a-a7a4-812a29915916"
+                },
+                {
+                  "id": "99f7f287-6527-4c65-a89a-1dbb2e899548",
+                  "name": "Unauthorized",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/supplier/order-out?status=<string>&limit=<integer>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "supplier",
+                        "order-out"
+                      ],
+                      "query": [
+                        {
+                          "description": "Filter orders by status",
+                          "key": "status",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Maximum number of orders to return",
+                          "key": "limit",
+                          "value": "<integer>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T02:48:12.000Z",
+                  "updatedAt": "2026-07-28T02:48:12.000Z",
+                  "uid": "35240-99f7f287-6527-4c65-a89a-1dbb2e899548"
+                }
+              ],
+              "createdAt": "2026-07-28T02:48:12.000Z",
+              "updatedAt": "2026-07-28T02:48:12.000Z",
+              "uid": "35240-c91637b0-cab3-436a-8137-5ca5ff578919"
+            }
+          ],
+          "id": "70e681cb-197e-477e-a1a3-1c682d968203",
+          "createdAt": "2026-07-28T02:48:12.000Z",
+          "updatedAt": "2026-07-28T02:48:12.000Z",
+          "uid": "35240-70e681cb-197e-477e-a1a3-1c682d968203"
+        }
+      ],
+      "id": "a0ffd510-4a55-4f94-b986-9f6e4f74a902",
+      "createdAt": "2026-07-28T02:48:12.000Z",
+      "updatedAt": "2026-07-28T02:48:12.000Z",
+      "uid": "35240-a0ffd510-4a55-4f94-b986-9f6e4f74a902"
+    },
+    {
+      "name": "retailer",
+      "item": [
+        {
+          "name": "order-in",
+          "item": [
+            {
+              "name": "Create Retailer Order",
+              "id": "4251438b-962e-451e-aba7-91e1f44a31a0",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{bearerToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"orders\": [\n    {\n      \"orderId\": \"<string>\",\n      \"orderType\": \"Dropship\",\n      \"status\": \"<string>\",\n      \"createdAt\": \"<dateTime>\",\n      \"updatedAt\": \"<dateTime>\",\n      \"items\": [\n        {\n          \"lineItemId\": \"<string>\",\n          \"sku\": \"<string>\",\n          \"quantity\": \"<integer>\",\n          \"cost\": \"<float>\",\n          \"price\": \"<float>\"\n        },\n        {\n          \"lineItemId\": \"<string>\",\n          \"sku\": \"<string>\",\n          \"quantity\": \"<integer>\",\n          \"cost\": \"<float>\",\n          \"price\": \"<float>\"\n        }\n      ],\n      \"shippingAddress\": {\n        \"name\": \"<string>\",\n        \"street1\": \"<string>\",\n        \"street2\": \"<string>\",\n        \"city\": \"<string>\",\n        \"state\": \"<string>\",\n        \"postalCode\": \"<string>\",\n        \"country\": \"<string>\",\n        \"phone\": \"<string>\"\n      }\n    },\n    {\n      \"orderId\": \"<string>\",\n      \"orderType\": \"Marketplace\",\n      \"status\": \"<string>\",\n      \"createdAt\": \"<dateTime>\",\n      \"updatedAt\": \"<dateTime>\",\n      \"items\": [\n        {\n          \"lineItemId\": \"<string>\",\n          \"sku\": \"<string>\",\n          \"quantity\": \"<integer>\",\n          \"cost\": \"<float>\",\n          \"price\": \"<float>\"\n        },\n        {\n          \"lineItemId\": \"<string>\",\n          \"sku\": \"<string>\",\n          \"quantity\": \"<integer>\",\n          \"cost\": \"<float>\",\n          \"price\": \"<float>\"\n        }\n      ],\n      \"shippingAddress\": {\n        \"name\": \"<string>\",\n        \"street1\": \"<string>\",\n        \"street2\": \"<string>\",\n        \"city\": \"<string>\",\n        \"state\": \"<string>\",\n        \"postalCode\": \"<string>\",\n        \"country\": \"<string>\",\n        \"phone\": \"<string>\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/retailer/order-in",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "retailer",
+                    "order-in"
+                  ]
+                },
+                "description": "Retailer operation to submit consumer orders to the Dsco platform. The orderType must be set to Dropship for dropship orders. Supports small batch and large batch modes."
+              },
+              "response": [
+                {
+                  "id": "69faebae-a346-46f3-88cb-761d780e27f9",
+                  "name": "Order created",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"orders\": [\n    {\n      \"orderId\": \"<string>\",\n      \"orderType\": \"Dropship\",\n      \"status\": \"<string>\",\n      \"createdAt\": \"<dateTime>\",\n      \"updatedAt\": \"<dateTime>\",\n      \"items\": [\n        {\n          \"lineItemId\": \"<string>\",\n          \"sku\": \"<string>\",\n          \"quantity\": \"<integer>\",\n          \"cost\": \"<float>\",\n          \"price\": \"<float>\"\n        },\n        {\n          \"lineItemId\": \"<string>\",\n          \"sku\": \"<string>\",\n          \"quantity\": \"<integer>\",\n          \"cost\": \"<float>\",\n          \"price\": \"<float>\"\n        }\n      ],\n      \"shippingAddress\": {\n        \"name\": \"<string>\",\n        \"street1\": \"<string>\",\n        \"street2\": \"<string>\",\n        \"city\": \"<string>\",\n        \"state\": \"<string>\",\n        \"postalCode\": \"<string>\",\n        \"country\": \"<string>\",\n        \"phone\": \"<string>\"\n      }\n    },\n    {\n      \"orderId\": \"<string>\",\n      \"orderType\": \"Marketplace\",\n      \"status\": \"<string>\",\n      \"createdAt\": \"<dateTime>\",\n      \"updatedAt\": \"<dateTime>\",\n      \"items\": [\n        {\n          \"lineItemId\": \"<string>\",\n          \"sku\": \"<string>\",\n          \"quantity\": \"<integer>\",\n          \"cost\": \"<float>\",\n          \"price\": \"<float>\"\n        },\n        {\n          \"lineItemId\": \"<string>\",\n          \"sku\": \"<string>\",\n          \"quantity\": \"<integer>\",\n          \"cost\": \"<float>\",\n          \"price\": \"<float>\"\n        }\n      ],\n      \"shippingAddress\": {\n        \"name\": \"<string>\",\n        \"street1\": \"<string>\",\n        \"street2\": \"<string>\",\n        \"city\": \"<string>\",\n        \"state\": \"<string>\",\n        \"postalCode\": \"<string>\",\n        \"country\": \"<string>\",\n        \"phone\": \"<string>\"\n      }\n    }\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/retailer/order-in",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "retailer",
+                        "order-in"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"batchId\": \"<string>\",\n  \"status\": \"accepted\",\n  \"errors\": [\n    {\n      \"code\": \"<string>\",\n      \"message\": \"<string>\",\n      \"field\": \"<string>\"\n    },\n    {\n      \"code\": \"<string>\",\n      \"message\": \"<string>\",\n      \"field\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T02:48:12.000Z",
+                  "updatedAt": "2026-07-28T02:48:12.000Z",
+                  "uid": "35240-69faebae-a346-46f3-88cb-761d780e27f9"
+                },
+                {
+                  "id": "74e6c059-1613-4e01-9721-4e5d5c651b03",
+                  "name": "Bad request",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"orders\": [\n    {\n      \"orderId\": \"<string>\",\n      \"orderType\": \"Dropship\",\n      \"status\": \"<string>\",\n      \"createdAt\": \"<dateTime>\",\n      \"updatedAt\": \"<dateTime>\",\n      \"items\": [\n        {\n          \"lineItemId\": \"<string>\",\n          \"sku\": \"<string>\",\n          \"quantity\": \"<integer>\",\n          \"cost\": \"<float>\",\n          \"price\": \"<float>\"\n        },\n        {\n          \"lineItemId\": \"<string>\",\n          \"sku\": \"<string>\",\n          \"quantity\": \"<integer>\",\n          \"cost\": \"<float>\",\n          \"price\": \"<float>\"\n        }\n      ],\n      \"shippingAddress\": {\n        \"name\": \"<string>\",\n        \"street1\": \"<string>\",\n        \"street2\": \"<string>\",\n        \"city\": \"<string>\",\n        \"state\": \"<string>\",\n        \"postalCode\": \"<string>\",\n        \"country\": \"<string>\",\n        \"phone\": \"<string>\"\n      }\n    },\n    {\n      \"orderId\": \"<string>\",\n      \"orderType\": \"Marketplace\",\n      \"status\": \"<string>\",\n      \"createdAt\": \"<dateTime>\",\n      \"updatedAt\": \"<dateTime>\",\n      \"items\": [\n        {\n          \"lineItemId\": \"<string>\",\n          \"sku\": \"<string>\",\n          \"quantity\": \"<integer>\",\n          \"cost\": \"<float>\",\n          \"price\": \"<float>\"\n        },\n        {\n          \"lineItemId\": \"<string>\",\n          \"sku\": \"<string>\",\n          \"quantity\": \"<integer>\",\n          \"cost\": \"<float>\",\n          \"price\": \"<float>\"\n        }\n      ],\n      \"shippingAddress\": {\n        \"name\": \"<string>\",\n        \"street1\": \"<string>\",\n        \"street2\": \"<string>\",\n        \"city\": \"<string>\",\n        \"state\": \"<string>\",\n        \"postalCode\": \"<string>\",\n        \"country\": \"<string>\",\n        \"phone\": \"<string>\"\n      }\n    }\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/retailer/order-in",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "retailer",
+                        "order-in"
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T02:48:12.000Z",
+                  "updatedAt": "2026-07-28T02:48:12.000Z",
+                  "uid": "35240-74e6c059-1613-4e01-9721-4e5d5c651b03"
+                },
+                {
+                  "id": "b4b32548-313f-455a-bf9f-4434333f4dd4",
+                  "name": "Unauthorized",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"orders\": [\n    {\n      \"orderId\": \"<string>\",\n      \"orderType\": \"Dropship\",\n      \"status\": \"<string>\",\n      \"createdAt\": \"<dateTime>\",\n      \"updatedAt\": \"<dateTime>\",\n      \"items\": [\n        {\n          \"lineItemId\": \"<string>\",\n          \"sku\": \"<string>\",\n          \"quantity\": \"<integer>\",\n          \"cost\": \"<float>\",\n          \"price\": \"<float>\"\n        },\n        {\n          \"lineItemId\": \"<string>\",\n          \"sku\": \"<string>\",\n          \"quantity\": \"<integer>\",\n          \"cost\": \"<float>\",\n          \"price\": \"<float>\"\n        }\n      ],\n      \"shippingAddress\": {\n        \"name\": \"<string>\",\n        \"street1\": \"<string>\",\n        \"street2\": \"<string>\",\n        \"city\": \"<string>\",\n        \"state\": \"<string>\",\n        \"postalCode\": \"<string>\",\n        \"country\": \"<string>\",\n        \"phone\": \"<string>\"\n      }\n    },\n    {\n      \"orderId\": \"<string>\",\n      \"orderType\": \"Marketplace\",\n      \"status\": \"<string>\",\n      \"createdAt\": \"<dateTime>\",\n      \"updatedAt\": \"<dateTime>\",\n      \"items\": [\n        {\n          \"lineItemId\": \"<string>\",\n          \"sku\": \"<string>\",\n          \"quantity\": \"<integer>\",\n          \"cost\": \"<float>\",\n          \"price\": \"<float>\"\n        },\n        {\n          \"lineItemId\": \"<string>\",\n          \"sku\": \"<string>\",\n          \"quantity\": \"<integer>\",\n          \"cost\": \"<float>\",\n          \"price\": \"<float>\"\n        }\n      ],\n      \"shippingAddress\": {\n        \"name\": \"<string>\",\n        \"street1\": \"<string>\",\n        \"street2\": \"<string>\",\n        \"city\": \"<string>\",\n        \"state\": \"<string>\",\n        \"postalCode\": \"<string>\",\n        \"country\": \"<string>\",\n        \"phone\": \"<string>\"\n      }\n    }\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/retailer/order-in",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "retailer",
+                        "order-in"
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T02:48:12.000Z",
+                  "updatedAt": "2026-07-28T02:48:12.000Z",
+                  "uid": "35240-b4b32548-313f-455a-bf9f-4434333f4dd4"
+                }
+              ],
+              "createdAt": "2026-07-28T02:48:12.000Z",
+              "updatedAt": "2026-07-28T02:48:12.000Z",
+              "uid": "35240-4251438b-962e-451e-aba7-91e1f44a31a0"
+            }
+          ],
+          "id": "3cce6551-9494-4c46-9f76-706a3c92669a",
+          "createdAt": "2026-07-28T02:48:12.000Z",
+          "updatedAt": "2026-07-28T02:48:12.000Z",
+          "uid": "35240-3cce6551-9494-4c46-9f76-706a3c92669a"
+        },
+        {
+          "name": "cancel-in",
+          "item": [
+            {
+              "name": "Request Order Cancel",
+              "id": "21afe54e-c02c-4978-8292-1d010a014fbd",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{bearerToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"cancellations\": [\n    {\n      \"orderId\": \"<string>\",\n      \"lineItemId\": \"<string>\",\n      \"reason\": \"<string>\"\n    },\n    {\n      \"orderId\": \"<string>\",\n      \"lineItemId\": \"<string>\",\n      \"reason\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/retailer/cancel-in",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "retailer",
+                    "cancel-in"
+                  ]
+                },
+                "description": "Retailer operation to request cancellation of an order item. Synchronous only."
+              },
+              "response": [
+                {
+                  "id": "e569055c-1c1c-4b9e-8732-1f66fd3ec9ab",
+                  "name": "Cancellation requested",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"cancellations\": [\n    {\n      \"orderId\": \"<string>\",\n      \"lineItemId\": \"<string>\",\n      \"reason\": \"<string>\"\n    },\n    {\n      \"orderId\": \"<string>\",\n      \"lineItemId\": \"<string>\",\n      \"reason\": \"<string>\"\n    }\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/retailer/cancel-in",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "retailer",
+                        "cancel-in"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"batchId\": \"<string>\",\n  \"status\": \"accepted\",\n  \"errors\": [\n    {\n      \"code\": \"<string>\",\n      \"message\": \"<string>\",\n      \"field\": \"<string>\"\n    },\n    {\n      \"code\": \"<string>\",\n      \"message\": \"<string>\",\n      \"field\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T02:48:12.000Z",
+                  "updatedAt": "2026-07-28T02:48:12.000Z",
+                  "uid": "35240-e569055c-1c1c-4b9e-8732-1f66fd3ec9ab"
+                },
+                {
+                  "id": "0a7481f6-544a-424a-bc81-f53ffccd58aa",
+                  "name": "Unauthorized",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"cancellations\": [\n    {\n      \"orderId\": \"<string>\",\n      \"lineItemId\": \"<string>\",\n      \"reason\": \"<string>\"\n    },\n    {\n      \"orderId\": \"<string>\",\n      \"lineItemId\": \"<string>\",\n      \"reason\": \"<string>\"\n    }\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/retailer/cancel-in",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "retailer",
+                        "cancel-in"
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T02:48:12.000Z",
+                  "updatedAt": "2026-07-28T02:48:12.000Z",
+                  "uid": "35240-0a7481f6-544a-424a-bc81-f53ffccd58aa"
+                }
+              ],
+              "createdAt": "2026-07-28T02:48:12.000Z",
+              "updatedAt": "2026-07-28T02:48:12.000Z",
+              "uid": "35240-21afe54e-c02c-4978-8292-1d010a014fbd"
+            }
+          ],
+          "id": "704a817d-3c7a-4e98-bbae-7b9ef23be43e",
+          "createdAt": "2026-07-28T02:48:12.000Z",
+          "updatedAt": "2026-07-28T02:48:12.000Z",
+          "uid": "35240-704a817d-3c7a-4e98-bbae-7b9ef23be43e"
+        }
+      ],
+      "id": "fbeea1b6-5bd7-42a2-9c74-459cd1bebf70",
+      "createdAt": "2026-07-28T02:48:12.000Z",
+      "updatedAt": "2026-07-28T02:48:12.000Z",
+      "uid": "35240-fbeea1b6-5bd7-42a2-9c74-459cd1bebf70"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.dsco.io/api/v3"
+    }
+  ]
+}

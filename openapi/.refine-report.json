@@ -1,0 +1,28 @@
+{
+  "provider": "rithum",
+  "sources": [
+    "rithum-authentication-api-openapi.yml",
+    "rithum-catalog-api-openapi.yml",
+    "rithum-inventory-api-openapi.yml",
+    "rithum-invoices-api-openapi.yml",
+    "rithum-orders-api-openapi.yml",
+    "rithum-returns-api-openapi.yml",
+    "rithum-shipments-api-openapi.yml",
+    "rithum-streams-api-openapi.yml"
+  ],
+  "outputs": [
+    "rithum-authentication-api-openapi.yml",
+    "rithum-catalog-api-openapi.yml",
+    "rithum-inventory-api-openapi.yml",
+    "rithum-invoices-api-openapi.yml",
+    "rithum-orders-api-openapi.yml",
+    "rithum-returns-api-openapi.yml",
+    "rithum-shipments-api-openapi.yml",
+    "rithum-streams-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}

@@ -1,0 +1,209 @@
+{
+  "info": {
+    "_postman_id": "80dbd299-62f0-4725-8282-ca3e9eaf2146",
+    "name": "Dsco Platform Authentication API",
+    "description": "The Dsco Platform API v3 provides dropship and marketplace commerce integration for retailers and suppliers. It supports order management, catalog synchronization, inventory updates, shipment tracking, returns processing, and invoice workflows via streaming and batch endpoints. Authentication uses OAuth2 bearer tokens obtained from the token endpoint.\n\nContact Support:\n Name: Rithum Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:48:01.000Z",
+    "updatedAt": "2026-07-28T02:48:02.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-80dbd299-62f0-4725-8282-ca3e9eaf2146"
+  },
+  "item": [
+    {
+      "name": "oauth2",
+      "item": [
+        {
+          "name": "token",
+          "item": [
+            {
+              "name": "Get Access Token",
+              "id": "43f8f749-0b3d-4808-8d81-a0cc95c7f155",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/x-www-form-urlencoded"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "description": "(Required) ",
+                      "key": "grant_type",
+                      "value": "client_credentials"
+                    },
+                    {
+                      "description": "(Required) OAuth2 client ID",
+                      "key": "client_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "(Required) OAuth2 client secret",
+                      "key": "client_secret",
+                      "value": "<string>"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/oauth2/token",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "oauth2",
+                    "token"
+                  ]
+                },
+                "description": "Obtain an OAuth2 bearer token using client credentials grant. The returned token must be used as a Bearer token in the Authorization header for all subsequent API requests."
+              },
+              "response": [
+                {
+                  "id": "9831c035-68a5-420e-8591-46c22f30b149",
+                  "name": "Access token response",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/x-www-form-urlencoded"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "urlencoded",
+                      "urlencoded": [
+                        {
+                          "description": "(Required) ",
+                          "key": "grant_type",
+                          "value": "client_credentials"
+                        },
+                        {
+                          "description": "(Required) OAuth2 client ID",
+                          "key": "client_id",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "(Required) OAuth2 client secret",
+                          "key": "client_secret",
+                          "value": "<string>"
+                        }
+                      ]
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/oauth2/token",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "oauth2",
+                        "token"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"access_token\": \"<string>\",\n  \"token_type\": \"<string>\",\n  \"expires_in\": \"<integer>\"\n}",
+                  "createdAt": "2026-07-28T02:48:02.000Z",
+                  "updatedAt": "2026-07-28T02:48:02.000Z",
+                  "uid": "35240-9831c035-68a5-420e-8591-46c22f30b149"
+                },
+                {
+                  "id": "c17bb0a6-835e-4d15-9f33-28d02dd1a057",
+                  "name": "Unauthorized",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/x-www-form-urlencoded"
+                      }
+                    ],
+                    "body": {
+                      "mode": "urlencoded",
+                      "urlencoded": [
+                        {
+                          "description": "(Required) ",
+                          "key": "grant_type",
+                          "value": "client_credentials"
+                        },
+                        {
+                          "description": "(Required) OAuth2 client ID",
+                          "key": "client_id",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "(Required) OAuth2 client secret",
+                          "key": "client_secret",
+                          "value": "<string>"
+                        }
+                      ]
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/oauth2/token",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "oauth2",
+                        "token"
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T02:48:02.000Z",
+                  "updatedAt": "2026-07-28T02:48:02.000Z",
+                  "uid": "35240-c17bb0a6-835e-4d15-9f33-28d02dd1a057"
+                }
+              ],
+              "createdAt": "2026-07-28T02:48:02.000Z",
+              "updatedAt": "2026-07-28T02:48:02.000Z",
+              "uid": "35240-43f8f749-0b3d-4808-8d81-a0cc95c7f155"
+            }
+          ],
+          "id": "4a4d3395-7c57-4891-b2f7-031c227dafbd",
+          "createdAt": "2026-07-28T02:48:02.000Z",
+          "updatedAt": "2026-07-28T02:48:02.000Z",
+          "uid": "35240-4a4d3395-7c57-4891-b2f7-031c227dafbd"
+        }
+      ],
+      "id": "ffdff125-3cae-44ee-9e1a-8fa4e611aa33",
+      "createdAt": "2026-07-28T02:48:02.000Z",
+      "updatedAt": "2026-07-28T02:48:02.000Z",
+      "uid": "35240-ffdff125-3cae-44ee-9e1a-8fa4e611aa33"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.dsco.io/api/v3"
+    }
+  ]
+}

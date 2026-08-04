@@ -1,0 +1,913 @@
+openapi: 3.0.3
+info:
+  title: Dsco Platform API
+  description: >-
+    The Dsco Platform API v3 provides dropship and marketplace commerce
+    integration for retailers and suppliers. It supports order management,
+    catalog synchronization, inventory updates, shipment tracking, returns
+    processing, and invoice workflows via streaming and batch endpoints.
+    Authentication uses OAuth2 bearer tokens obtained from the token endpoint.
+  version: v3
+  contact:
+    name: Rithum Support
+    url: https://knowledge.rithum.com
+  termsOfService: https://www.rithum.com/terms-of-service/
+  license:
+    name: Proprietary
+servers:
+  - url: https://api.dsco.io/api/v3
+    description: Dsco Platform API v3
+
+tags:
+  - name: Authentication
+    description: OAuth2 token management
+  - name: Orders
+    description: Retailer and supplier order operations
+  - name: Catalog
+    description: Product catalog synchronization
+  - name: Inventory
+    description: Inventory level management
+  - name: Shipments
+    description: Shipment creation and tracking
+  - name: Invoices
+    description: Invoice processing
+  - name: Returns
+    description: Return and refund management
+  - name: Streams
+    description: Event stream management for real-time data
+
+paths:
+  /oauth2/token:
+    post:
+      operationId: getAccessToken
+      summary: Get Access Token
+      description: >-
+        Obtain an OAuth2 bearer token using client credentials grant.
+        The returned token must be used as a Bearer token in the Authorization
+        header for all subsequent API requests.
+      tags:
+        - Authentication
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+                - grant_type
+                - client_id
+                - client_secret
+              properties:
+                grant_type:
+                  type: string
+                  enum:
+                    - client_credentials
+                client_id:
+                  type: string
+                  description: OAuth2 client ID
+                client_secret:
+                  type: string
+                  description: OAuth2 client secret
+      responses:
+        '200':
+          description: Access token response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessToken'
+        '401':
+          description: Unauthorized
+
+  /supplier/catalog-in:
+    post:
+      operationId: supplierUpdateCatalog
+      summary: Update Supplier Catalog
+      description: >-
+        Supplier operation to create or update product catalog items.
+        Supports small batch (synchronous) and large batch (asynchronous) modes.
+      tags:
+        - Catalog
+      security:
+        - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CatalogBatchRequest'
+      responses:
+        '200':
+          description: Catalog update accepted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BatchResponse'
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+
+  /supplier/inventory-in:
+    post:
+      operationId: supplierUpdateInventory
+      summary: Update Supplier Inventory
+      description: >-
+        Supplier operation to update inventory quantities for catalog items.
+        Supports small batch and large batch modes.
+      tags:
+        - Inventory
+      security:
+        - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InventoryBatchRequest'
+      responses:
+        '200':
+          description: Inventory update accepted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BatchResponse'
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+
+  /supplier/shipment-in:
+    post:
+      operationId: supplierCreateShipment
+      summary: Create Shipment
+      description: >-
+        Supplier operation to create shipment records for fulfilled orders.
+        Supports small batch mode only.
+      tags:
+        - Shipments
+      security:
+        - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ShipmentBatchRequest'
+      responses:
+        '200':
+          description: Shipment created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BatchResponse'
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+
+  /supplier/cancel-in:
+    post:
+      operationId: supplierCancelOrderItem
+      summary: Cancel Order Item
+      description: >-
+        Supplier operation to cancel an order item. Supports small batch mode only.
+      tags:
+        - Orders
+      security:
+        - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CancelBatchRequest'
+      responses:
+        '200':
+          description: Cancellation accepted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BatchResponse'
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+
+  /supplier/acknowledge-order-in:
+    post:
+      operationId: supplierAcknowledgeOrder
+      summary: Acknowledge Orders
+      description: >-
+        Supplier operation to acknowledge receipt of orders. Synchronous only.
+      tags:
+        - Orders
+      security:
+        - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AcknowledgeOrderRequest'
+      responses:
+        '200':
+          description: Order acknowledged
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BatchResponse'
+        '401':
+          description: Unauthorized
+
+  /supplier/return-in:
+    post:
+      operationId: supplierCreateReturn
+      summary: Create Return
+      description: >-
+        Supplier operation to create return records.
+        Supports small batch and large batch modes.
+      tags:
+        - Returns
+      security:
+        - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReturnBatchRequest'
+      responses:
+        '200':
+          description: Return created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BatchResponse'
+        '401':
+          description: Unauthorized
+
+  /supplier/invoice-in:
+    post:
+      operationId: supplierCreateInvoice
+      summary: Create Invoice
+      description: >-
+        Supplier operation to submit invoices for fulfilled orders.
+        Supports small batch mode only.
+      tags:
+        - Invoices
+      security:
+        - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InvoiceBatchRequest'
+      responses:
+        '200':
+          description: Invoice created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BatchResponse'
+        '401':
+          description: Unauthorized
+
+  /supplier/order-out/{orderId}:
+    get:
+      operationId: supplierGetOrder
+      summary: Get Order by ID
+      description: >-
+        Supplier operation to retrieve a specific order by its identifier.
+      tags:
+        - Orders
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: orderId
+          in: path
+          required: true
+          schema:
+            type: string
+          description: The unique identifier of the order
+      responses:
+        '200':
+          description: Order details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Order not found
+
+  /supplier/order-out:
+    get:
+      operationId: supplierListOrders
+      summary: List Orders
+      description: >-
+        Supplier operation to retrieve a collection of orders.
+      tags:
+        - Orders
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: status
+          in: query
+          schema:
+            type: string
+          description: Filter orders by status
+        - name: limit
+          in: query
+          schema:
+            type: integer
+          description: Maximum number of orders to return
+      responses:
+        '200':
+          description: List of orders
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrderList'
+        '401':
+          description: Unauthorized
+
+  /retailer/order-in:
+    post:
+      operationId: retailerCreateOrder
+      summary: Create Retailer Order
+      description: >-
+        Retailer operation to submit consumer orders to the Dsco platform.
+        The orderType must be set to Dropship for dropship orders.
+        Supports small batch and large batch modes.
+      tags:
+        - Orders
+      security:
+        - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RetailerOrderRequest'
+      responses:
+        '200':
+          description: Order created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BatchResponse'
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+
+  /retailer/return-in:
+    post:
+      operationId: retailerCreateReturn
+      summary: Create Retailer Return
+      description: >-
+        Retailer operation to initiate a return. Supports small batch and large batch.
+      tags:
+        - Returns
+      security:
+        - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReturnBatchRequest'
+      responses:
+        '200':
+          description: Return initiated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BatchResponse'
+        '401':
+          description: Unauthorized
+
+  /retailer/cancel-in:
+    post:
+      operationId: retailerRequestCancel
+      summary: Request Order Cancel
+      description: >-
+        Retailer operation to request cancellation of an order item.
+        Synchronous only.
+      tags:
+        - Orders
+      security:
+        - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CancelBatchRequest'
+      responses:
+        '200':
+          description: Cancellation requested
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BatchResponse'
+        '401':
+          description: Unauthorized
+
+  /retailer/catalog-in:
+    post:
+      operationId: retailerUpdateCatalogAttribution
+      summary: Update Catalog Attribution
+      description: >-
+        Retailer operation to update catalog attribution data.
+        Large batch only.
+      tags:
+        - Catalog
+      security:
+        - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CatalogBatchRequest'
+      responses:
+        '200':
+          description: Attribution updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BatchResponse'
+        '401':
+          description: Unauthorized
+
+  /streams:
+    post:
+      operationId: createStream
+      summary: Create Stream
+      description: >-
+        Create a new event stream with query parameters for filtering events.
+        Streams enable near-real-time event delivery via micro-polling.
+      tags:
+        - Streams
+      security:
+        - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StreamDefinition'
+      responses:
+        '200':
+          description: Stream created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Stream'
+        '401':
+          description: Unauthorized
+
+    get:
+      operationId: listStreams
+      summary: List Streams
+      description: >-
+        Retrieve stream definitions and partition positions.
+      tags:
+        - Streams
+      security:
+        - BearerAuth: []
+      responses:
+        '200':
+          description: List of streams
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StreamList'
+        '401':
+          description: Unauthorized
+
+  /streams/{streamId}/events:
+    get:
+      operationId: getStreamEvents
+      summary: Get Stream Events
+      description: >-
+        Retrieve events from a stream starting from a checkpoint position.
+        Events persist for 90 days per partition.
+      tags:
+        - Streams
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: streamId
+          in: path
+          required: true
+          schema:
+            type: string
+          description: The stream identifier
+        - name: position
+          in: query
+          schema:
+            type: string
+          description: Checkpoint position to start reading from
+        - name: limit
+          in: query
+          schema:
+            type: integer
+          description: Maximum number of events to return
+      responses:
+        '200':
+          description: Stream events
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StreamEvents'
+        '401':
+          description: Unauthorized
+
+  /streams/{streamId}/position:
+    post:
+      operationId: updateStreamPosition
+      summary: Update Stream Position
+      description: >-
+        Confirm successful processing of events by updating the stream position.
+      tags:
+        - Streams
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: streamId
+          in: path
+          required: true
+          schema:
+            type: string
+          description: The stream identifier
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StreamPositionUpdate'
+      responses:
+        '200':
+          description: Position updated
+        '401':
+          description: Unauthorized
+
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+
+  schemas:
+    AccessToken:
+      type: object
+      properties:
+        access_token:
+          type: string
+          description: The OAuth2 bearer token
+        token_type:
+          type: string
+          example: bearer
+        expires_in:
+          type: integer
+          description: Token expiry in seconds
+
+    BatchResponse:
+      type: object
+      properties:
+        batchId:
+          type: string
+          description: Unique identifier for the batch operation
+        status:
+          type: string
+          enum:
+            - accepted
+            - processing
+            - completed
+            - failed
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/BatchError'
+
+    BatchError:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+        field:
+          type: string
+
+    Order:
+      type: object
+      properties:
+        orderId:
+          type: string
+          description: Unique order identifier
+        orderType:
+          type: string
+          enum:
+            - Dropship
+            - Marketplace
+          description: Type of order
+        status:
+          type: string
+          description: Current order status
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrderItem'
+        shippingAddress:
+          $ref: '#/components/schemas/Address'
+
+    OrderItem:
+      type: object
+      properties:
+        lineItemId:
+          type: string
+        sku:
+          type: string
+        quantity:
+          type: integer
+        cost:
+          type: number
+          format: float
+          description: Cost charged by supplier to retailer
+        price:
+          type: number
+          format: float
+
+    OrderList:
+      type: object
+      properties:
+        orders:
+          type: array
+          items:
+            $ref: '#/components/schemas/Order'
+        totalCount:
+          type: integer
+        hasMore:
+          type: boolean
+
+    CatalogItem:
+      type: object
+      properties:
+        sku:
+          type: string
+          description: Supplier stock keeping unit
+        title:
+          type: string
+        description:
+          type: string
+        cost:
+          type: number
+          format: float
+          description: Item cost (required for dropship model)
+        retailModelRules:
+          $ref: '#/components/schemas/RetailModelRules'
+        attributes:
+          type: object
+          additionalProperties: true
+
+    RetailModelRules:
+      type: object
+      properties:
+        allowedModels:
+          type: array
+          items:
+            type: string
+            enum:
+              - dropship
+              - marketplace
+
+    CatalogBatchRequest:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/CatalogItem'
+
+    InventoryItem:
+      type: object
+      properties:
+        sku:
+          type: string
+        quantity:
+          type: integer
+        warehouseId:
+          type: string
+
+    InventoryBatchRequest:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/InventoryItem'
+
+    ShipmentItem:
+      type: object
+      properties:
+        orderId:
+          type: string
+        lineItemId:
+          type: string
+        trackingNumber:
+          type: string
+        carrier:
+          type: string
+        shippedAt:
+          type: string
+          format: date-time
+
+    ShipmentBatchRequest:
+      type: object
+      properties:
+        shipments:
+          type: array
+          items:
+            $ref: '#/components/schemas/ShipmentItem'
+
+    CancelRequest:
+      type: object
+      properties:
+        orderId:
+          type: string
+        lineItemId:
+          type: string
+        reason:
+          type: string
+
+    CancelBatchRequest:
+      type: object
+      properties:
+        cancellations:
+          type: array
+          items:
+            $ref: '#/components/schemas/CancelRequest'
+
+    AcknowledgeOrderRequest:
+      type: object
+      properties:
+        orderIds:
+          type: array
+          items:
+            type: string
+
+    ReturnItem:
+      type: object
+      properties:
+        orderId:
+          type: string
+        lineItemId:
+          type: string
+        returnReason:
+          type: string
+        quantity:
+          type: integer
+
+    ReturnBatchRequest:
+      type: object
+      properties:
+        returns:
+          type: array
+          items:
+            $ref: '#/components/schemas/ReturnItem'
+
+    InvoiceItem:
+      type: object
+      properties:
+        orderId:
+          type: string
+        invoiceNumber:
+          type: string
+        amount:
+          type: number
+          format: float
+        invoiceDate:
+          type: string
+          format: date
+
+    InvoiceBatchRequest:
+      type: object
+      properties:
+        invoices:
+          type: array
+          items:
+            $ref: '#/components/schemas/InvoiceItem'
+
+    RetailerOrderRequest:
+      type: object
+      properties:
+        orders:
+          type: array
+          items:
+            $ref: '#/components/schemas/Order'
+
+    StreamDefinition:
+      type: object
+      properties:
+        objectType:
+          type: string
+          enum:
+            - order
+            - return
+            - inventory
+            - catalog
+            - invoice
+            - orderitemchange
+        queryParams:
+          type: object
+          additionalProperties: true
+        partitionCount:
+          type: integer
+          default: 1
+
+    Stream:
+      type: object
+      properties:
+        streamId:
+          type: string
+        objectType:
+          type: string
+        partitionCount:
+          type: integer
+        createdAt:
+          type: string
+          format: date-time
+
+    StreamList:
+      type: object
+      properties:
+        streams:
+          type: array
+          items:
+            $ref: '#/components/schemas/Stream'
+
+    StreamEvents:
+      type: object
+      properties:
+        events:
+          type: array
+          items:
+            $ref: '#/components/schemas/StreamEvent'
+        position:
+          type: string
+        hasMore:
+          type: boolean
+
+    StreamEvent:
+      type: object
+      properties:
+        eventId:
+          type: string
+        eventType:
+          type: string
+        objectType:
+          type: string
+        data:
+          type: object
+          additionalProperties: true
+        timestamp:
+          type: string
+          format: date-time
+
+    StreamPositionUpdate:
+      type: object
+      properties:
+        position:
+          type: string
+          description: The position to update to (confirming events processed)
+
+    Address:
+      type: object
+      properties:
+        name:
+          type: string
+        street1:
+          type: string
+        street2:
+          type: string
+        city:
+          type: string
+        state:
+          type: string
+        postalCode:
+          type: string
+        country:
+          type: string
+        phone:
+          type: string

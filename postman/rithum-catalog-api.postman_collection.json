@@ -1,0 +1,426 @@
+{
+  "info": {
+    "_postman_id": "0efdfe3a-75f7-4640-b052-5be1c842fd21",
+    "name": "Dsco Platform Authentication Catalog API",
+    "description": "The Dsco Platform API v3 provides dropship and marketplace commerce integration for retailers and suppliers. It supports order management, catalog synchronization, inventory updates, shipment tracking, returns processing, and invoice workflows via streaming and batch endpoints. Authentication uses OAuth2 bearer tokens obtained from the token endpoint.\n\nContact Support:\n Name: Rithum Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:48:03.000Z",
+    "updatedAt": "2026-07-28T02:48:03.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-0efdfe3a-75f7-4640-b052-5be1c842fd21"
+  },
+  "item": [
+    {
+      "name": "supplier",
+      "item": [
+        {
+          "name": "catalog-in",
+          "item": [
+            {
+              "name": "Update Supplier Catalog",
+              "id": "c153d43a-16c9-4331-b721-744d5cab135b",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{bearerToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"items\": [\n    {\n      \"sku\": \"<string>\",\n      \"title\": \"<string>\",\n      \"description\": \"<string>\",\n      \"cost\": \"<float>\",\n      \"retailModelRules\": {\n        \"allowedModels\": [\n          \"marketplace\",\n          \"dropship\"\n        ]\n      },\n      \"attributes\": {\n        \"exercitation_6af\": \"eu velit consequat aliqua\",\n        \"doloree\": 8748900.320283726\n      }\n    },\n    {\n      \"sku\": \"<string>\",\n      \"title\": \"<string>\",\n      \"description\": \"<string>\",\n      \"cost\": \"<float>\",\n      \"retailModelRules\": {\n        \"allowedModels\": [\n          \"dropship\",\n          \"dropship\"\n        ]\n      },\n      \"attributes\": {\n        \"mollit_d\": true,\n        \"tempor6\": \"proident laboris aliqua Lorem\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/supplier/catalog-in",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "supplier",
+                    "catalog-in"
+                  ]
+                },
+                "description": "Supplier operation to create or update product catalog items. Supports small batch (synchronous) and large batch (asynchronous) modes."
+              },
+              "response": [
+                {
+                  "id": "085ad1e0-1a53-4c18-9e58-87468d89734b",
+                  "name": "Catalog update accepted",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"items\": [\n    {\n      \"sku\": \"<string>\",\n      \"title\": \"<string>\",\n      \"description\": \"<string>\",\n      \"cost\": \"<float>\",\n      \"retailModelRules\": {\n        \"allowedModels\": [\n          \"marketplace\",\n          \"dropship\"\n        ]\n      },\n      \"attributes\": {\n        \"exercitation_6af\": \"eu velit consequat aliqua\",\n        \"doloree\": 8748900.320283726\n      }\n    },\n    {\n      \"sku\": \"<string>\",\n      \"title\": \"<string>\",\n      \"description\": \"<string>\",\n      \"cost\": \"<float>\",\n      \"retailModelRules\": {\n        \"allowedModels\": [\n          \"dropship\",\n          \"dropship\"\n        ]\n      },\n      \"attributes\": {\n        \"mollit_d\": true,\n        \"tempor6\": \"proident laboris aliqua Lorem\"\n      }\n    }\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/supplier/catalog-in",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "supplier",
+                        "catalog-in"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"batchId\": \"<string>\",\n  \"status\": \"completed\",\n  \"errors\": [\n    {\n      \"code\": \"<string>\",\n      \"message\": \"<string>\",\n      \"field\": \"<string>\"\n    },\n    {\n      \"code\": \"<string>\",\n      \"message\": \"<string>\",\n      \"field\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T02:48:03.000Z",
+                  "updatedAt": "2026-07-28T02:48:03.000Z",
+                  "uid": "35240-085ad1e0-1a53-4c18-9e58-87468d89734b"
+                },
+                {
+                  "id": "d87996ab-3aa2-46e1-a096-6659426a4010",
+                  "name": "Bad request",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"items\": [\n    {\n      \"sku\": \"<string>\",\n      \"title\": \"<string>\",\n      \"description\": \"<string>\",\n      \"cost\": \"<float>\",\n      \"retailModelRules\": {\n        \"allowedModels\": [\n          \"marketplace\",\n          \"dropship\"\n        ]\n      },\n      \"attributes\": {\n        \"exercitation_6af\": \"eu velit consequat aliqua\",\n        \"doloree\": 8748900.320283726\n      }\n    },\n    {\n      \"sku\": \"<string>\",\n      \"title\": \"<string>\",\n      \"description\": \"<string>\",\n      \"cost\": \"<float>\",\n      \"retailModelRules\": {\n        \"allowedModels\": [\n          \"dropship\",\n          \"dropship\"\n        ]\n      },\n      \"attributes\": {\n        \"mollit_d\": true,\n        \"tempor6\": \"proident laboris aliqua Lorem\"\n      }\n    }\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/supplier/catalog-in",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "supplier",
+                        "catalog-in"
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T02:48:03.000Z",
+                  "updatedAt": "2026-07-28T02:48:03.000Z",
+                  "uid": "35240-d87996ab-3aa2-46e1-a096-6659426a4010"
+                },
+                {
+                  "id": "56a57308-fc63-4881-a5b6-f979b54bbb39",
+                  "name": "Unauthorized",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"items\": [\n    {\n      \"sku\": \"<string>\",\n      \"title\": \"<string>\",\n      \"description\": \"<string>\",\n      \"cost\": \"<float>\",\n      \"retailModelRules\": {\n        \"allowedModels\": [\n          \"marketplace\",\n          \"dropship\"\n        ]\n      },\n      \"attributes\": {\n        \"exercitation_6af\": \"eu velit consequat aliqua\",\n        \"doloree\": 8748900.320283726\n      }\n    },\n    {\n      \"sku\": \"<string>\",\n      \"title\": \"<string>\",\n      \"description\": \"<string>\",\n      \"cost\": \"<float>\",\n      \"retailModelRules\": {\n        \"allowedModels\": [\n          \"dropship\",\n          \"dropship\"\n        ]\n      },\n      \"attributes\": {\n        \"mollit_d\": true,\n        \"tempor6\": \"proident laboris aliqua Lorem\"\n      }\n    }\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/supplier/catalog-in",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "supplier",
+                        "catalog-in"
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T02:48:03.000Z",
+                  "updatedAt": "2026-07-28T02:48:03.000Z",
+                  "uid": "35240-56a57308-fc63-4881-a5b6-f979b54bbb39"
+                }
+              ],
+              "createdAt": "2026-07-28T02:48:03.000Z",
+              "updatedAt": "2026-07-28T02:48:03.000Z",
+              "uid": "35240-c153d43a-16c9-4331-b721-744d5cab135b"
+            }
+          ],
+          "id": "05af44bc-e896-431c-846d-51835289e667",
+          "createdAt": "2026-07-28T02:48:03.000Z",
+          "updatedAt": "2026-07-28T02:48:03.000Z",
+          "uid": "35240-05af44bc-e896-431c-846d-51835289e667"
+        }
+      ],
+      "id": "20464584-3764-4815-b965-5d775baea096",
+      "createdAt": "2026-07-28T02:48:03.000Z",
+      "updatedAt": "2026-07-28T02:48:03.000Z",
+      "uid": "35240-20464584-3764-4815-b965-5d775baea096"
+    },
+    {
+      "name": "retailer",
+      "item": [
+        {
+          "name": "catalog-in",
+          "item": [
+            {
+              "name": "Update Catalog Attribution",
+              "id": "cf5c6086-b0bc-4a48-a07e-363c79ee44f2",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{bearerToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"items\": [\n    {\n      \"sku\": \"<string>\",\n      \"title\": \"<string>\",\n      \"description\": \"<string>\",\n      \"cost\": \"<float>\",\n      \"retailModelRules\": {\n        \"allowedModels\": [\n          \"marketplace\",\n          \"dropship\"\n        ]\n      },\n      \"attributes\": {\n        \"exercitation_6af\": \"eu velit consequat aliqua\",\n        \"doloree\": 8748900.320283726\n      }\n    },\n    {\n      \"sku\": \"<string>\",\n      \"title\": \"<string>\",\n      \"description\": \"<string>\",\n      \"cost\": \"<float>\",\n      \"retailModelRules\": {\n        \"allowedModels\": [\n          \"dropship\",\n          \"dropship\"\n        ]\n      },\n      \"attributes\": {\n        \"mollit_d\": true,\n        \"tempor6\": \"proident laboris aliqua Lorem\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/retailer/catalog-in",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "retailer",
+                    "catalog-in"
+                  ]
+                },
+                "description": "Retailer operation to update catalog attribution data. Large batch only."
+              },
+              "response": [
+                {
+                  "id": "80d952ca-38dd-4810-8813-6acdf4276f86",
+                  "name": "Attribution updated",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"items\": [\n    {\n      \"sku\": \"<string>\",\n      \"title\": \"<string>\",\n      \"description\": \"<string>\",\n      \"cost\": \"<float>\",\n      \"retailModelRules\": {\n        \"allowedModels\": [\n          \"marketplace\",\n          \"dropship\"\n        ]\n      },\n      \"attributes\": {\n        \"exercitation_6af\": \"eu velit consequat aliqua\",\n        \"doloree\": 8748900.320283726\n      }\n    },\n    {\n      \"sku\": \"<string>\",\n      \"title\": \"<string>\",\n      \"description\": \"<string>\",\n      \"cost\": \"<float>\",\n      \"retailModelRules\": {\n        \"allowedModels\": [\n          \"dropship\",\n          \"dropship\"\n        ]\n      },\n      \"attributes\": {\n        \"mollit_d\": true,\n        \"tempor6\": \"proident laboris aliqua Lorem\"\n      }\n    }\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/retailer/catalog-in",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "retailer",
+                        "catalog-in"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"batchId\": \"<string>\",\n  \"status\": \"completed\",\n  \"errors\": [\n    {\n      \"code\": \"<string>\",\n      \"message\": \"<string>\",\n      \"field\": \"<string>\"\n    },\n    {\n      \"code\": \"<string>\",\n      \"message\": \"<string>\",\n      \"field\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T02:48:03.000Z",
+                  "updatedAt": "2026-07-28T02:48:03.000Z",
+                  "uid": "35240-80d952ca-38dd-4810-8813-6acdf4276f86"
+                },
+                {
+                  "id": "aa522b34-0b23-4252-94a3-6fc8852f65d4",
+                  "name": "Unauthorized",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"items\": [\n    {\n      \"sku\": \"<string>\",\n      \"title\": \"<string>\",\n      \"description\": \"<string>\",\n      \"cost\": \"<float>\",\n      \"retailModelRules\": {\n        \"allowedModels\": [\n          \"marketplace\",\n          \"dropship\"\n        ]\n      },\n      \"attributes\": {\n        \"exercitation_6af\": \"eu velit consequat aliqua\",\n        \"doloree\": 8748900.320283726\n      }\n    },\n    {\n      \"sku\": \"<string>\",\n      \"title\": \"<string>\",\n      \"description\": \"<string>\",\n      \"cost\": \"<float>\",\n      \"retailModelRules\": {\n        \"allowedModels\": [\n          \"dropship\",\n          \"dropship\"\n        ]\n      },\n      \"attributes\": {\n        \"mollit_d\": true,\n        \"tempor6\": \"proident laboris aliqua Lorem\"\n      }\n    }\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/retailer/catalog-in",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "retailer",
+                        "catalog-in"
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T02:48:03.000Z",
+                  "updatedAt": "2026-07-28T02:48:03.000Z",
+                  "uid": "35240-aa522b34-0b23-4252-94a3-6fc8852f65d4"
+                }
+              ],
+              "createdAt": "2026-07-28T02:48:03.000Z",
+              "updatedAt": "2026-07-28T02:48:03.000Z",
+              "uid": "35240-cf5c6086-b0bc-4a48-a07e-363c79ee44f2"
+            }
+          ],
+          "id": "63b69b03-d585-438b-b2ae-34b6d9407f86",
+          "createdAt": "2026-07-28T02:48:03.000Z",
+          "updatedAt": "2026-07-28T02:48:03.000Z",
+          "uid": "35240-63b69b03-d585-438b-b2ae-34b6d9407f86"
+        }
+      ],
+      "id": "202efa49-b01c-44a1-9eac-bade053c1322",
+      "createdAt": "2026-07-28T02:48:03.000Z",
+      "updatedAt": "2026-07-28T02:48:03.000Z",
+      "uid": "35240-202efa49-b01c-44a1-9eac-bade053c1322"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.dsco.io/api/v3"
+    }
+  ]
+}
