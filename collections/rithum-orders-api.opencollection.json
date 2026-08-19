@@ -1,0 +1,146 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Dsco Platform Authentication Orders API",
+    "version": "v3"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Orders",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Cancel Order Item",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.dsco.io/api/v3/supplier/cancel-in",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Supplier operation to cancel an order item. Supports small batch mode only."
+        },
+        {
+          "info": {
+            "name": "Acknowledge Orders",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.dsco.io/api/v3/supplier/acknowledge-order-in",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Supplier operation to acknowledge receipt of orders. Synchronous only."
+        },
+        {
+          "info": {
+            "name": "Get Order by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.dsco.io/api/v3/supplier/order-out/:orderId",
+            "params": [
+              {
+                "name": "orderId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the order"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Supplier operation to retrieve a specific order by its identifier."
+        },
+        {
+          "info": {
+            "name": "List Orders",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.dsco.io/api/v3/supplier/order-out",
+            "params": [
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filter orders by status"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of orders to return"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Supplier operation to retrieve a collection of orders."
+        },
+        {
+          "info": {
+            "name": "Create Retailer Order",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.dsco.io/api/v3/retailer/order-in",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Retailer operation to submit consumer orders to the Dsco platform. The orderType must be set to Dropship for dropship orders. Supports small batch and large batch modes."
+        },
+        {
+          "info": {
+            "name": "Request Order Cancel",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.dsco.io/api/v3/retailer/cancel-in",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Retailer operation to request cancellation of an order item. Synchronous only."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

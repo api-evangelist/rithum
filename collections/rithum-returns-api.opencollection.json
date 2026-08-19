@@ -1,0 +1,56 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Dsco Platform Authentication Returns API",
+    "version": "v3"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Returns",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create Return",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.dsco.io/api/v3/supplier/return-in",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Supplier operation to create return records. Supports small batch and large batch modes."
+        },
+        {
+          "info": {
+            "name": "Create Retailer Return",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.dsco.io/api/v3/retailer/return-in",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Retailer operation to initiate a return. Supports small batch and large batch."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

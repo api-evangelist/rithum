@@ -1,0 +1,189 @@
+{
+  "item": [
+    {
+      "id": "834499fb-e0b8-4668-b7bf-9562d299c5f0",
+      "name": "Invoices",
+      "description": {
+        "content": "Invoice processing",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "0f607804-2108-4302-acad-a919cbb9ccc6",
+          "name": "Create Invoice",
+          "request": {
+            "name": "Create Invoice",
+            "description": {
+              "content": "Supplier operation to submit invoices for fulfilled orders. Supports small batch mode only.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "supplier",
+                "invoice-in"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"invoices\": [\n    {\n      \"orderId\": \"<string>\",\n      \"invoiceNumber\": \"<string>\",\n      \"amount\": \"<float>\",\n      \"invoiceDate\": \"<date>\"\n    },\n    {\n      \"orderId\": \"<string>\",\n      \"invoiceNumber\": \"<string>\",\n      \"amount\": \"<float>\",\n      \"invoiceDate\": \"<date>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "d0b45572-4f15-4857-8f3b-812e7218a43f",
+              "name": "Invoice created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "supplier",
+                    "invoice-in"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"invoices\": [\n    {\n      \"orderId\": \"<string>\",\n      \"invoiceNumber\": \"<string>\",\n      \"amount\": \"<float>\",\n      \"invoiceDate\": \"<date>\"\n    },\n    {\n      \"orderId\": \"<string>\",\n      \"invoiceNumber\": \"<string>\",\n      \"amount\": \"<float>\",\n      \"invoiceDate\": \"<date>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"batchId\": \"string\",\n  \"status\": \"processing\",\n  \"errors\": [\n    {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"field\": \"string\"\n    },\n    {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"field\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "521ba259-d7bb-43d3-85da-10e3f5a5d8df",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "supplier",
+                    "invoice-in"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"invoices\": [\n    {\n      \"orderId\": \"<string>\",\n      \"invoiceNumber\": \"<string>\",\n      \"amount\": \"<float>\",\n      \"invoiceDate\": \"<date>\"\n    },\n    {\n      \"orderId\": \"<string>\",\n      \"invoiceNumber\": \"<string>\",\n      \"amount\": \"<float>\",\n      \"invoiceDate\": \"<date>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.dsco.io/api/v3",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "7c3a8431-dcc2-4437-a3f0-d808455d46a7",
+    "name": "Dsco Platform Authentication Invoices API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Dsco Platform API v3 provides dropship and marketplace commerce integration for retailers and suppliers. It supports order management, catalog synchronization, inventory updates, shipment tracking, returns processing, and invoice workflows via streaming and batch endpoints. Authentication uses OAuth2 bearer tokens obtained from the token endpoint.\n\nContact Support:\n Name: Rithum Support",
+      "type": "text/plain"
+    }
+  }
+}

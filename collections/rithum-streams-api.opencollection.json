@@ -1,0 +1,114 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Dsco Platform Authentication Streams API",
+    "version": "v3"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Streams",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Streams",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.dsco.io/api/v3/streams",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Retrieve stream definitions and partition positions."
+        },
+        {
+          "info": {
+            "name": "Create Stream",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.dsco.io/api/v3/streams",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create a new event stream with query parameters for filtering events. Streams enable near-real-time event delivery via micro-polling."
+        },
+        {
+          "info": {
+            "name": "Get Stream Events",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.dsco.io/api/v3/streams/:streamId/events",
+            "params": [
+              {
+                "name": "streamId",
+                "value": "",
+                "type": "path",
+                "description": "The stream identifier"
+              },
+              {
+                "name": "position",
+                "value": "",
+                "type": "query",
+                "description": "Checkpoint position to start reading from"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of events to return"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Retrieve events from a stream starting from a checkpoint position. Events persist for 90 days per partition."
+        },
+        {
+          "info": {
+            "name": "Update Stream Position",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.dsco.io/api/v3/streams/:streamId/position",
+            "params": [
+              {
+                "name": "streamId",
+                "value": "",
+                "type": "path",
+                "description": "The stream identifier"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Confirm successful processing of events by updating the stream position."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
