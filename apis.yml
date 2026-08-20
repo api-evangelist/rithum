@@ -25,6 +25,13 @@ tags:
   - Commerce
   - Dropship
   - Marketplace
+  - E-Commerce
+  - Supply Chain
+  - Retail
+tags_raw:
+  - Commerce
+  - Dropship
+  - Marketplace
   - Ecommerce
   - Supply Chain
   - Retail
@@ -155,6 +162,8 @@ apis:
   humanURL: https://api.dsco.io/
   baseURL: https://api.dsco.io/api/v3
   tags:
+  - Order
+  tags_raw:
   - Orders
   properties:
   - type: OpenAPI
