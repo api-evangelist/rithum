@@ -7,6 +7,18 @@ description: >-
   platform powers the Dsco API for dropship and marketplace integrations. In 2025, Rithum launched RithumIQ, an AI
   engine for automated commerce recommendations and operational insights.
 type: Index
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: freemium
   onboarding: self-serve
