@@ -1,0 +1,44 @@
+slug: rithum
+provider: Rithum
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Transportation & Logistics
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 3
+edges:
+- tag: Orders
+  spec_file: rithum-orders-api-openapi.yml
+  capability_id: BC-520.40
+  capability_id_l1: BC-520
+  capability_name: Order Fulfilment Management
+  confidence: 0.8
+  evidence: supplierAcknowledgeOrder 'Acknowledge Orders'; retailerCreateOrder 'Create Retailer Order';
+    supplierCancelOrderItem 'Cancel Order Item'
+  reason: Order creation, acknowledgement, retrieval and cancellation across retailer and supplier is
+    order fulfilment orchestration in a dropship supply chain.
+- tag: Inventory
+  spec_file: rithum-inventory-api-openapi.yml
+  capability_id: BC-530.10
+  capability_id_l1: BC-530
+  capability_name: Stock Level Management
+  confidence: 0.72
+  evidence: POST /supplier/inventory-in supplierUpdateInventory 'Update Supplier Inventory'; schema InventoryItem
+  reason: Supplier stock quantity/availability updates feed stock level visibility across the dropship
+    network — Inventory Management.
+- tag: Invoices
+  spec_file: rithum-invoices-api-openapi.yml
+  capability_id: BC-200.30
+  capability_id_l1: BC-200
+  capability_name: Accounts Receivable Management
+  confidence: 0.7
+  evidence: POST /supplier/invoice-in supplierCreateInvoice 'Create Invoice'; schemas InvoiceBatchRequest,
+    InvoiceItem
+  reason: Supplier issues invoices to the retailer for fulfilled dropship orders — customer invoicing/receivables
+    side of the transaction; not freight invoicing.

@@ -287,6 +287,9 @@ apis:
     url: >-
       https://raw.githubusercontent.com/api-evangelist/rithum/refs/heads/main/json-schema/dsco-catalog-item-schema.json
 common:
+  - type: CapabilityMap
+    url: capabilities/rithum-capability-edges.yml
+    name: Rithum Business Capability Map
   - type: PostmanWorkspace
     url: https://www.postman.com/kinlaneapi/rithum/overview
   - type: AgenticAccess
