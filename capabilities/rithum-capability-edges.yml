@@ -11,7 +11,7 @@ capability_model:
   attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
     CC BY 4.0
   notice: NOTICE
-edge_count: 3
+edge_count: 4
 edges:
 - tag: Orders
   spec_file: rithum-orders-api-openapi.yml
@@ -23,6 +23,19 @@ edges:
     supplierCancelOrderItem 'Cancel Order Item'
   reason: Order creation, acknowledgement, retrieval and cancellation across retailer and supplier is
     order fulfilment orchestration in a dropship supply chain.
+- tag: Catalog
+  spec_file: rithum-catalog-api-openapi.yml
+  capability_id: BC-2370
+  capability_id_l1: BC-2370
+  capability_name: Product Information Management
+  confidence: 0.75
+  evidence: POST /supplier/catalog-in  supplierUpdateCatalog  Update Supplier Catalog; POST /retailer/catalog-in  retailerUpdateCatalogAttribution;
+    schemas CatalogItem, RetailModelRules
+  reason: Suppliers push item catalog records and retailers set catalog attribution rules across the dropship/marketplace
+    network — authoritative product item data exchanged with trading partners, i.e. Product Information
+    Management. Cannot cleanly choose between item master maintenance and channel syndication from two
+    operations, so L2 left null.
+  recovered_from: vertical-retail-consumer-goods-edges.json
 - tag: Inventory
   spec_file: rithum-inventory-api-openapi.yml
   capability_id: BC-530.10
