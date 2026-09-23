@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Dsco Platform Authentication Returns API
+  title: Dsco Platform Returns API
   description: The Dsco Platform API v3 provides dropship and marketplace commerce integration for retailers and suppliers. It supports order management, catalog synchronization, inventory updates, shipment tracking, returns processing, and invoice workflows via streaming and batch endpoints. Authentication uses OAuth2 bearer tokens obtained from the token endpoint.
   version: v3
   contact:
@@ -66,13 +66,6 @@ paths:
           description: Unauthorized
 components:
   schemas:
-    ReturnBatchRequest:
-      type: object
-      properties:
-        returns:
-          type: array
-          items:
-            $ref: '#/components/schemas/ReturnItem'
     BatchError:
       type: object
       properties:
@@ -99,6 +92,13 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/BatchError'
+    ReturnBatchRequest:
+      type: object
+      properties:
+        returns:
+          type: array
+          items:
+            $ref: '#/components/schemas/ReturnItem'
     ReturnItem:
       type: object
       properties:

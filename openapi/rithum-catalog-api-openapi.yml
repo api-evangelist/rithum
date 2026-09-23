@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Dsco Platform Authentication Catalog API
+  title: Dsco Platform Catalog API
   description: The Dsco Platform API v3 provides dropship and marketplace commerce integration for retailers and suppliers. It supports order management, catalog synchronization, inventory updates, shipment tracking, returns processing, and invoice workflows via streaming and batch endpoints. Authentication uses OAuth2 bearer tokens obtained from the token endpoint.
   version: v3
   contact:
@@ -68,16 +68,13 @@ paths:
           description: Unauthorized
 components:
   schemas:
-    RetailModelRules:
+    CatalogBatchRequest:
       type: object
       properties:
-        allowedModels:
+        items:
           type: array
           items:
-            type: string
-            enum:
-            - dropship
-            - marketplace
+            $ref: '#/components/schemas/CatalogItem'
     BatchError:
       type: object
       properties:
@@ -104,6 +101,16 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/BatchError'
+    RetailModelRules:
+      type: object
+      properties:
+        allowedModels:
+          type: array
+          items:
+            type: string
+            enum:
+            - dropship
+            - marketplace
     CatalogItem:
       type: object
       properties:
@@ -123,13 +130,6 @@ components:
         attributes:
           type: object
           additionalProperties: true
-    CatalogBatchRequest:
-      type: object
-      properties:
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/CatalogItem'
   securitySchemes:
     BearerAuth:
       type: http

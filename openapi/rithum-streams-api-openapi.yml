@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Dsco Platform Authentication Streams API
+  title: Dsco Platform Streams API
   description: The Dsco Platform API v3 provides dropship and marketplace commerce integration for retailers and suppliers. It supports order management, catalog synchronization, inventory updates, shipment tracking, returns processing, and invoice workflows via streaming and batch endpoints. Authentication uses OAuth2 bearer tokens obtained from the token endpoint.
   version: v3
   contact:
@@ -121,18 +121,13 @@ paths:
           description: Unauthorized
 components:
   schemas:
-    Stream:
+    StreamList:
       type: object
       properties:
-        streamId:
-          type: string
-        objectType:
-          type: string
-        partitionCount:
-          type: integer
-        createdAt:
-          type: string
-          format: date-time
+        streams:
+          type: array
+          items:
+            $ref: '#/components/schemas/Stream'
     StreamDefinition:
       type: object
       properties:
@@ -151,6 +146,35 @@ components:
         partitionCount:
           type: integer
           default: 1
+    Stream:
+      type: object
+      properties:
+        streamId:
+          type: string
+        objectType:
+          type: string
+        partitionCount:
+          type: integer
+        createdAt:
+          type: string
+          format: date-time
+    StreamPositionUpdate:
+      type: object
+      properties:
+        position:
+          type: string
+          description: The position to update to (confirming events processed)
+    StreamEvents:
+      type: object
+      properties:
+        events:
+          type: array
+          items:
+            $ref: '#/components/schemas/StreamEvent'
+        position:
+          type: string
+        hasMore:
+          type: boolean
     StreamEvent:
       type: object
       properties:
@@ -166,30 +190,6 @@ components:
         timestamp:
           type: string
           format: date-time
-    StreamPositionUpdate:
-      type: object
-      properties:
-        position:
-          type: string
-          description: The position to update to (confirming events processed)
-    StreamList:
-      type: object
-      properties:
-        streams:
-          type: array
-          items:
-            $ref: '#/components/schemas/Stream'
-    StreamEvents:
-      type: object
-      properties:
-        events:
-          type: array
-          items:
-            $ref: '#/components/schemas/StreamEvent'
-        position:
-          type: string
-        hasMore:
-          type: boolean
   securitySchemes:
     BearerAuth:
       type: http

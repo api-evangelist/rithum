@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Dsco Platform Authentication Shipments API
+  title: Dsco Platform Shipments API
   description: The Dsco Platform API v3 provides dropship and marketplace commerce integration for retailers and suppliers. It supports order management, catalog synchronization, inventory updates, shipment tracking, returns processing, and invoice workflows via streaming and batch endpoints. Authentication uses OAuth2 bearer tokens obtained from the token endpoint.
   version: v3
   contact:
@@ -51,20 +51,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/ShipmentItem'
-    ShipmentItem:
-      type: object
-      properties:
-        orderId:
-          type: string
-        lineItemId:
-          type: string
-        trackingNumber:
-          type: string
-        carrier:
-          type: string
-        shippedAt:
-          type: string
-          format: date-time
     BatchError:
       type: object
       properties:
@@ -91,6 +77,20 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/BatchError'
+    ShipmentItem:
+      type: object
+      properties:
+        orderId:
+          type: string
+        lineItemId:
+          type: string
+        trackingNumber:
+          type: string
+        carrier:
+          type: string
+        shippedAt:
+          type: string
+          format: date-time
   securitySchemes:
     BearerAuth:
       type: http

@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Dsco Platform Authentication Inventory API
+  title: Dsco Platform Inventory API
   description: The Dsco Platform API v3 provides dropship and marketplace commerce integration for retailers and suppliers. It supports order management, catalog synchronization, inventory updates, shipment tracking, returns processing, and invoice workflows via streaming and batch endpoints. Authentication uses OAuth2 bearer tokens obtained from the token endpoint.
   version: v3
   contact:
@@ -51,6 +51,15 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/InventoryItem'
+    InventoryItem:
+      type: object
+      properties:
+        sku:
+          type: string
+        quantity:
+          type: integer
+        warehouseId:
+          type: string
     BatchError:
       type: object
       properties:
@@ -77,15 +86,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/BatchError'
-    InventoryItem:
-      type: object
-      properties:
-        sku:
-          type: string
-        quantity:
-          type: integer
-        warehouseId:
-          type: string
   securitySchemes:
     BearerAuth:
       type: http
