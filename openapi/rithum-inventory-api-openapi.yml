@@ -51,15 +51,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/InventoryItem'
-    InventoryItem:
-      type: object
-      properties:
-        sku:
-          type: string
-        quantity:
-          type: integer
-        warehouseId:
-          type: string
     BatchError:
       type: object
       properties:
@@ -86,6 +77,15 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/BatchError'
+    InventoryItem:
+      type: object
+      properties:
+        sku:
+          type: string
+        quantity:
+          type: integer
+        warehouseId:
+          type: string
   securitySchemes:
     BearerAuth:
       type: http

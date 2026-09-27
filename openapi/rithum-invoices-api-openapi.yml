@@ -42,6 +42,13 @@ paths:
           description: Unauthorized
 components:
   schemas:
+    InvoiceBatchRequest:
+      type: object
+      properties:
+        invoices:
+          type: array
+          items:
+            $ref: '#/components/schemas/InvoiceItem'
     InvoiceItem:
       type: object
       properties:
@@ -81,13 +88,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/BatchError'
-    InvoiceBatchRequest:
-      type: object
-      properties:
-        invoices:
-          type: array
-          items:
-            $ref: '#/components/schemas/InvoiceItem'
   securitySchemes:
     BearerAuth:
       type: http

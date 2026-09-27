@@ -66,6 +66,17 @@ paths:
           description: Unauthorized
 components:
   schemas:
+    ReturnItem:
+      type: object
+      properties:
+        orderId:
+          type: string
+        lineItemId:
+          type: string
+        returnReason:
+          type: string
+        quantity:
+          type: integer
     BatchError:
       type: object
       properties:
@@ -99,17 +110,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/ReturnItem'
-    ReturnItem:
-      type: object
-      properties:
-        orderId:
-          type: string
-        lineItemId:
-          type: string
-        returnReason:
-          type: string
-        quantity:
-          type: integer
   securitySchemes:
     BearerAuth:
       type: http
