@@ -193,46 +193,13 @@ components:
           type: string
         phone:
           type: string
-    BatchResponse:
+    CancelBatchRequest:
       type: object
       properties:
-        batchId:
-          type: string
-          description: Unique identifier for the batch operation
-        status:
-          type: string
-          enum:
-          - accepted
-          - processing
-          - completed
-          - failed
-        errors:
+        cancellations:
           type: array
           items:
-            $ref: '#/components/schemas/BatchError'
-    AcknowledgeOrderRequest:
-      type: object
-      properties:
-        orderIds:
-          type: array
-          items:
-            type: string
-    RetailerOrderRequest:
-      type: object
-      properties:
-        orders:
-          type: array
-          items:
-            $ref: '#/components/schemas/Order'
-    CancelRequest:
-      type: object
-      properties:
-        orderId:
-          type: string
-        lineItemId:
-          type: string
-        reason:
-          type: string
+            $ref: '#/components/schemas/CancelRequest'
     BatchError:
       type: object
       properties:
@@ -242,6 +209,13 @@ components:
           type: string
         field:
           type: string
+    RetailerOrderRequest:
+      type: object
+      properties:
+        orders:
+          type: array
+          items:
+            $ref: '#/components/schemas/Order'
     OrderItem:
       type: object
       properties:
@@ -258,13 +232,22 @@ components:
         price:
           type: number
           format: float
-    CancelBatchRequest:
+    CancelRequest:
       type: object
       properties:
-        cancellations:
+        orderId:
+          type: string
+        lineItemId:
+          type: string
+        reason:
+          type: string
+    AcknowledgeOrderRequest:
+      type: object
+      properties:
+        orderIds:
           type: array
           items:
-            $ref: '#/components/schemas/CancelRequest'
+            type: string
     OrderList:
       type: object
       properties:
@@ -303,6 +286,23 @@ components:
             $ref: '#/components/schemas/OrderItem'
         shippingAddress:
           $ref: '#/components/schemas/Address'
+    BatchResponse:
+      type: object
+      properties:
+        batchId:
+          type: string
+          description: Unique identifier for the batch operation
+        status:
+          type: string
+          enum:
+          - accepted
+          - processing
+          - completed
+          - failed
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/BatchError'
   securitySchemes:
     BearerAuth:
       type: http

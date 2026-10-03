@@ -44,22 +44,6 @@ paths:
           description: Unauthorized
 components:
   schemas:
-    ShipmentBatchRequest:
-      type: object
-      properties:
-        shipments:
-          type: array
-          items:
-            $ref: '#/components/schemas/ShipmentItem'
-    BatchError:
-      type: object
-      properties:
-        code:
-          type: string
-        message:
-          type: string
-        field:
-          type: string
     BatchResponse:
       type: object
       properties:
@@ -77,6 +61,13 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/BatchError'
+    ShipmentBatchRequest:
+      type: object
+      properties:
+        shipments:
+          type: array
+          items:
+            $ref: '#/components/schemas/ShipmentItem'
     ShipmentItem:
       type: object
       properties:
@@ -91,6 +82,15 @@ components:
         shippedAt:
           type: string
           format: date-time
+    BatchError:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+        field:
+          type: string
   securitySchemes:
     BearerAuth:
       type: http

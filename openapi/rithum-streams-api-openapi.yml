@@ -143,35 +143,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Stream'
-    StreamPositionUpdate:
-      type: object
-      properties:
-        position:
-          type: string
-          description: The position to update to (confirming events processed)
-    Stream:
-      type: object
-      properties:
-        streamId:
-          type: string
-        objectType:
-          type: string
-        partitionCount:
-          type: integer
-        createdAt:
-          type: string
-          format: date-time
-    StreamEvents:
-      type: object
-      properties:
-        events:
-          type: array
-          items:
-            $ref: '#/components/schemas/StreamEvent'
-        position:
-          type: string
-        hasMore:
-          type: boolean
     StreamDefinition:
       type: object
       properties:
@@ -190,6 +161,35 @@ components:
         partitionCount:
           type: integer
           default: 1
+    StreamEvents:
+      type: object
+      properties:
+        events:
+          type: array
+          items:
+            $ref: '#/components/schemas/StreamEvent'
+        position:
+          type: string
+        hasMore:
+          type: boolean
+    StreamPositionUpdate:
+      type: object
+      properties:
+        position:
+          type: string
+          description: The position to update to (confirming events processed)
+    Stream:
+      type: object
+      properties:
+        streamId:
+          type: string
+        objectType:
+          type: string
+        partitionCount:
+          type: integer
+        createdAt:
+          type: string
+          format: date-time
   securitySchemes:
     BearerAuth:
       type: http

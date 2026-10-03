@@ -42,35 +42,6 @@ paths:
           description: Unauthorized
 components:
   schemas:
-    InvoiceBatchRequest:
-      type: object
-      properties:
-        invoices:
-          type: array
-          items:
-            $ref: '#/components/schemas/InvoiceItem'
-    InvoiceItem:
-      type: object
-      properties:
-        orderId:
-          type: string
-        invoiceNumber:
-          type: string
-        amount:
-          type: number
-          format: float
-        invoiceDate:
-          type: string
-          format: date
-    BatchError:
-      type: object
-      properties:
-        code:
-          type: string
-        message:
-          type: string
-        field:
-          type: string
     BatchResponse:
       type: object
       properties:
@@ -88,6 +59,35 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/BatchError'
+    InvoiceItem:
+      type: object
+      properties:
+        orderId:
+          type: string
+        invoiceNumber:
+          type: string
+        amount:
+          type: number
+          format: float
+        invoiceDate:
+          type: string
+          format: date
+    InvoiceBatchRequest:
+      type: object
+      properties:
+        invoices:
+          type: array
+          items:
+            $ref: '#/components/schemas/InvoiceItem'
+    BatchError:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+        field:
+          type: string
   securitySchemes:
     BearerAuth:
       type: http
