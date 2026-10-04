@@ -121,21 +121,6 @@ paths:
           description: Unauthorized
 components:
   schemas:
-    StreamEvent:
-      type: object
-      properties:
-        eventId:
-          type: string
-        eventType:
-          type: string
-        objectType:
-          type: string
-        data:
-          type: object
-          additionalProperties: true
-        timestamp:
-          type: string
-          format: date-time
     StreamList:
       type: object
       properties:
@@ -143,6 +128,23 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Stream'
+    StreamPositionUpdate:
+      type: object
+      properties:
+        position:
+          type: string
+          description: The position to update to (confirming events processed)
+    StreamEvents:
+      type: object
+      properties:
+        events:
+          type: array
+          items:
+            $ref: '#/components/schemas/StreamEvent'
+        position:
+          type: string
+        hasMore:
+          type: boolean
     StreamDefinition:
       type: object
       properties:
@@ -161,23 +163,6 @@ components:
         partitionCount:
           type: integer
           default: 1
-    StreamEvents:
-      type: object
-      properties:
-        events:
-          type: array
-          items:
-            $ref: '#/components/schemas/StreamEvent'
-        position:
-          type: string
-        hasMore:
-          type: boolean
-    StreamPositionUpdate:
-      type: object
-      properties:
-        position:
-          type: string
-          description: The position to update to (confirming events processed)
     Stream:
       type: object
       properties:
@@ -188,6 +173,21 @@ components:
         partitionCount:
           type: integer
         createdAt:
+          type: string
+          format: date-time
+    StreamEvent:
+      type: object
+      properties:
+        eventId:
+          type: string
+        eventType:
+          type: string
+        objectType:
+          type: string
+        data:
+          type: object
+          additionalProperties: true
+        timestamp:
           type: string
           format: date-time
   securitySchemes:

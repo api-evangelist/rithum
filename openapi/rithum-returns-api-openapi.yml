@@ -66,6 +66,15 @@ paths:
           description: Unauthorized
 components:
   schemas:
+    BatchError:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+        field:
+          type: string
     BatchResponse:
       type: object
       properties:
@@ -83,13 +92,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/BatchError'
-    ReturnBatchRequest:
-      type: object
-      properties:
-        returns:
-          type: array
-          items:
-            $ref: '#/components/schemas/ReturnItem'
     ReturnItem:
       type: object
       properties:
@@ -101,15 +103,13 @@ components:
           type: string
         quantity:
           type: integer
-    BatchError:
+    ReturnBatchRequest:
       type: object
       properties:
-        code:
-          type: string
-        message:
-          type: string
-        field:
-          type: string
+        returns:
+          type: array
+          items:
+            $ref: '#/components/schemas/ReturnItem'
   securitySchemes:
     BearerAuth:
       type: http

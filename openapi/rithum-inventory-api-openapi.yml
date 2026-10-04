@@ -44,6 +44,15 @@ paths:
           description: Unauthorized
 components:
   schemas:
+    InventoryItem:
+      type: object
+      properties:
+        sku:
+          type: string
+        quantity:
+          type: integer
+        warehouseId:
+          type: string
     BatchResponse:
       type: object
       properties:
@@ -61,22 +70,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/BatchError'
-    InventoryBatchRequest:
-      type: object
-      properties:
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/InventoryItem'
-    InventoryItem:
-      type: object
-      properties:
-        sku:
-          type: string
-        quantity:
-          type: integer
-        warehouseId:
-          type: string
     BatchError:
       type: object
       properties:
@@ -86,6 +79,13 @@ components:
           type: string
         field:
           type: string
+    InventoryBatchRequest:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/InventoryItem'
   securitySchemes:
     BearerAuth:
       type: http

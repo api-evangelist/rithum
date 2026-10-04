@@ -44,6 +44,20 @@ paths:
           description: Unauthorized
 components:
   schemas:
+    ShipmentItem:
+      type: object
+      properties:
+        orderId:
+          type: string
+        lineItemId:
+          type: string
+        trackingNumber:
+          type: string
+        carrier:
+          type: string
+        shippedAt:
+          type: string
+          format: date-time
     BatchResponse:
       type: object
       properties:
@@ -68,20 +82,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/ShipmentItem'
-    ShipmentItem:
-      type: object
-      properties:
-        orderId:
-          type: string
-        lineItemId:
-          type: string
-        trackingNumber:
-          type: string
-        carrier:
-          type: string
-        shippedAt:
-          type: string
-          format: date-time
     BatchError:
       type: object
       properties:
