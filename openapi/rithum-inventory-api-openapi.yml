@@ -44,15 +44,6 @@ paths:
           description: Unauthorized
 components:
   schemas:
-    InventoryItem:
-      type: object
-      properties:
-        sku:
-          type: string
-        quantity:
-          type: integer
-        warehouseId:
-          type: string
     BatchResponse:
       type: object
       properties:
@@ -78,6 +69,15 @@ components:
         message:
           type: string
         field:
+          type: string
+    InventoryItem:
+      type: object
+      properties:
+        sku:
+          type: string
+        quantity:
+          type: integer
+        warehouseId:
           type: string
     InventoryBatchRequest:
       type: object

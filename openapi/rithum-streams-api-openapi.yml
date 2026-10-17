@@ -121,6 +121,18 @@ paths:
           description: Unauthorized
 components:
   schemas:
+    Stream:
+      type: object
+      properties:
+        streamId:
+          type: string
+        objectType:
+          type: string
+        partitionCount:
+          type: integer
+        createdAt:
+          type: string
+          format: date-time
     StreamList:
       type: object
       properties:
@@ -128,12 +140,21 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Stream'
-    StreamPositionUpdate:
+    StreamEvent:
       type: object
       properties:
-        position:
+        eventId:
           type: string
-          description: The position to update to (confirming events processed)
+        eventType:
+          type: string
+        objectType:
+          type: string
+        data:
+          type: object
+          additionalProperties: true
+        timestamp:
+          type: string
+          format: date-time
     StreamEvents:
       type: object
       properties:
@@ -163,33 +184,12 @@ components:
         partitionCount:
           type: integer
           default: 1
-    Stream:
+    StreamPositionUpdate:
       type: object
       properties:
-        streamId:
+        position:
           type: string
-        objectType:
-          type: string
-        partitionCount:
-          type: integer
-        createdAt:
-          type: string
-          format: date-time
-    StreamEvent:
-      type: object
-      properties:
-        eventId:
-          type: string
-        eventType:
-          type: string
-        objectType:
-          type: string
-        data:
-          type: object
-          additionalProperties: true
-        timestamp:
-          type: string
-          format: date-time
+          description: The position to update to (confirming events processed)
   securitySchemes:
     BearerAuth:
       type: http

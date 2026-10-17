@@ -68,6 +68,15 @@ paths:
           description: Unauthorized
 components:
   schemas:
+    BatchError:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+        field:
+          type: string
     BatchResponse:
       type: object
       properties:
@@ -85,32 +94,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/BatchError'
-    CatalogBatchRequest:
-      type: object
-      properties:
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/CatalogItem'
-    RetailModelRules:
-      type: object
-      properties:
-        allowedModels:
-          type: array
-          items:
-            type: string
-            enum:
-            - dropship
-            - marketplace
-    BatchError:
-      type: object
-      properties:
-        code:
-          type: string
-        message:
-          type: string
-        field:
-          type: string
     CatalogItem:
       type: object
       properties:
@@ -130,6 +113,23 @@ components:
         attributes:
           type: object
           additionalProperties: true
+    CatalogBatchRequest:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/CatalogItem'
+    RetailModelRules:
+      type: object
+      properties:
+        allowedModels:
+          type: array
+          items:
+            type: string
+            enum:
+            - dropship
+            - marketplace
   securitySchemes:
     BearerAuth:
       type: http
