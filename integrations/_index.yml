@@ -40,5 +40,5 @@
     - connectors/applications/rithum
     vendor_link: https://www.rithum.com/
     builder: Fivetran
-  status: pending-generation
+  status: not-a-workflow
   arazzo: null
