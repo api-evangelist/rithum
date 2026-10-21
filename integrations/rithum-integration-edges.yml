@@ -13,6 +13,9 @@ checked:
 - https://n8n.io/integrations/rithum/
 - https://zapier.com/apps/rithum/integrations
 - stripe/integrations/stripe-integration-edges.yml
+- https://advertising.amazon.com/partners/directory
+- https://sellercentral.amazon.com/gspn
+- https://sellercentral.amazon.com/selling-partner-appstore
 summary: null
 marketplace_apps: []
 edges:
@@ -59,4 +62,75 @@ edges:
     builder: Fivetran
   detected_by: sweep-data-integration.py
   first_seen: '2026-10-18'
+- partner_name: Amazon Selling Partner Appstore
+  partner: amazon-seller-central
+  partner_match: mirror
+  mirror_match: domain
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: own
+  evidence: https://sellercentral.amazon.com/selling-partner-appstore/dp/amzn1.sellerapps.app.33fb794c-b581-4bb5-b4fa-c7fa459357cd
+  mirror_of: amazon-seller-central/integrations/amazon-seller-central-integration-edges.yml
+  apps:
+  - Rithum for Brands
+  detected: '2026-10-21'
+  detected_by: sweep-amazon-sp-api-appstore.py
+- partner_name: Amazon Ads (partner directory, technology)
+  partner: amazon
+  partner_match: mirror
+  mirror_match: domain
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: own
+  evidence: https://advertising.amazon.com/partners/directory
+  mirror_of: amazon/integrations/amazon-integration-edges.yml
+  apps:
+  - ChannelAdvisor
+  contract_reference:
+    register: Amazon Ads Partner Directory (advertising.amazon.com/partners/directory, GetPartners)
+    registered_name: ChannelAdvisor
+    register_id: amzn1.ads1.ma1.7emfnol7u5ybijbpk5zobhu8h
+    matched_domain: rithum.com
+    matched_by: domain
+    services:
+    - ADVERTISING_EFFECTIVENESS
+    - AUDIENCE_AND_TARGETING
+    - BRAND_MEASUREMENT
+    - CAMPAIGN_MANAGEMENT
+    - CAMPAIGN_MONITORING
+    - CAMPAIGN_REPORTING
+    - CAMPAIGN_SETUP
+    - DETAIL_PAGE_SET_UP
+    - INVENTORY_MANAGEMENT
+    - PROMOTIONS
+    - REPORTING_AND_ANALYTICS
+    - RETAIL_PERFORMANCE_MEASUREMENT
+    - SALES_AND_PRICING_STRATEGY
+    - STORE_SETUP_AND_OPTIMIZATION
+    - VIDEO_MEASUREMENT
+    ads_products:
+    - AMAZON_DSP
+    - SPONSORED_BRANDS
+    - SPONSORED_DISPLAY
+    - SPONSORED_PRODUCTS
+    - STORES
+    - VIDEO_ADS
+    service_models:
+    - SELF_SERVICE
+    - SERVICE
+    signal_note: listing = participation; accreditation recorded as partner_tier; ads_certifications are Amazon
+      Ads LEARNING certifications held by staff, not product conformance, never certified_products
+    detected_by: sweep-amazon-sp-api-appstore.py
+    detected: '2026-10-21'
+    ads_certifications:
+    - AMAZON_DSP
+    - SPONSORED_ADS
+  detected: '2026-10-21'
+  detected_by: sweep-amazon-sp-api-appstore.py
+  partner_tier:
+  - ADVANCED_PARTNER
 templates: []
